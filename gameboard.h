@@ -18,6 +18,8 @@ public:
     explicit GameBoard(QWidget *parent = nullptr);
 
 signals:
+    void addNumberCommand(int* numbers, int count, NumberBlock* block);//记录所添加的数字
+    void deleteNumberCommand(int* numbers, int count, NumberBlock* block);//记录所删除的数字
 
 public slots:
     void moveFocus(int number);

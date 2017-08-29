@@ -22,6 +22,8 @@ public:
     int getNumber();
     bool isEditable();
     void clear();
+    void addNumbers(int* numbers,int count);
+    void deleteNumbers(int* numbers, int count);
 
 signals:
     void moveUp();
@@ -29,6 +31,8 @@ signals:
     void moveLeft();
     void moveRight();
     void highlight(int number);
+    void addNumberCommand(int* numbers, int count, NumberBlock* thisBlock);//记录所添加的数字
+    void deleteNumberCommand(int* numbers, int count, NumberBlock* thisBlock);//记录所删除的数字
 
 public slots:
 
@@ -42,7 +46,7 @@ protected:
     QLabel* label;
     QLabel* smallLabel[9];
     bool editable = 1;
-    int usedSmallLabel = 0;
+    int usedLabel = 0;
 };
 
 #endif // NUMBERBLOCK_H

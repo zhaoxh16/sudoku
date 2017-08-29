@@ -73,6 +73,9 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
             showHighlightSignalMapper->setMapping(blocks[number],number);
             //连接数字高亮信号映射器
             QObject::connect(blocks[number],SIGNAL(highlight(int)),this,SLOT(showHighlightNumber(int)));
+            //连接命令（用来撤销）信号
+            QObject::connect(blocks[number],SIGNAL(addNumberCommand(int*,int,NumberBlock*)),this, SIGNAL(addNumberCommand(int*,int,NumberBlock*)));
+            QObject::connect(blocks[number],SIGNAL(deleteNumberCommand(int*,int,NumberBlock*)),this,SIGNAL(deleteNumberCommand(int*,int,NumberBlock*)));
         }
     }
 
@@ -195,3 +198,4 @@ void GameBoard::restart(){
         }
     }
 }
+

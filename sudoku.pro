@@ -30,7 +30,8 @@ SOURCES += \
     numberblock.cpp \
     highlightframe.cpp \
     mainform.cpp \
-    timer.cpp
+    timer.cpp \
+    undomodule.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -38,4 +39,7 @@ HEADERS += \
     numberblock.h \
     highlightframe.h \
     mainform.h \
-    timer.h
+    timer.h \
+    undomodule.h
+
+DISTFILES +=

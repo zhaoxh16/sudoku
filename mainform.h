@@ -7,7 +7,11 @@
 #include <QGridLayout>
 #include "timer.h"
 #include <QPushButton>
+#include <QToolButton>
 #include <QHBoxLayout>
+#include <QUndoStack>
+#include <QToolBar>
+#include "undomodule.h"
 
 class MainForm : public QWidget
 {
@@ -18,6 +22,8 @@ public:
 signals:
 
 public slots:
+    void addNumberCommand(int* numbers, int count, NumberBlock* block);//记录所添加的数字
+    void deleteNumberCommand(int* numbers, int count, NumberBlock* block);//记录所删除的数字
 
 private:
     GameBoard* gameBoard;
@@ -25,6 +31,11 @@ private:
     QPushButton* startButton;
     QPushButton* pauseButton;
     QPushButton* restartButton;
+    QPushButton* undoButton;
+    QPushButton* redoButton;
+    QPushButton* markButton;
+    QUndoStack* undoStack;
+    QToolBar* toolBar;
 };
 
 #endif // MAINFORM_H
