@@ -6,19 +6,11 @@
 
 class AddNumbersCommand: public QUndoCommand{
 public:
-    AddNumbersCommand(int* numbers, int count, NumberBlock* block):QUndoCommand("Add Number"){
-        this->block = block;
-        this->numbers = numbers;
-        this->count = count;
-    }
+    AddNumbersCommand(int* numbers, int count, NumberBlock* block);
 
-    virtual void redo(){
-        block->addNumbers(numbers,count);
-    }
+    virtual void redo();
 
-    virtual void undo(){
-        block->deleteNumbers(numbers,count);
-    }
+    virtual void undo();
 
 private:
     NumberBlock* block;
@@ -28,19 +20,11 @@ private:
 
 class DeleteNumberCommand: public QUndoCommand{
 public:
-    DeleteNumberCommand(int* numbers, int count, NumberBlock* block):QUndoCommand("Delete Number"){
-        this->block = block;
-        this->numbers = numbers;
-        this->count = count;
-    }
+    DeleteNumberCommand(int* numbers, int count, NumberBlock* block);
 
-    virtual void redo(){
-        block->deleteNumbers(numbers,count);
-    }
+    virtual void redo();
 
-    virtual void undo(){
-        block->addNumbers(numbers,count);
-    }
+    virtual void undo();
 
 private:
     NumberBlock* block;
