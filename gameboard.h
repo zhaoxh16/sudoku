@@ -22,6 +22,7 @@ signals:
 public slots:
     void moveFocus(int number);
     void showHighlightFrame(int number);
+    void showHighlightNumber(int number);
 
 protected:
     NumberBlockPointer blocks[81];

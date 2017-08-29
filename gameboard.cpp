@@ -70,6 +70,8 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
             //连接highlightframe信号映射器
             QObject::connect(blocks[number],SIGNAL(highlight(int)),showHighlightSignalMapper,SLOT(map()));
             showHighlightSignalMapper->setMapping(blocks[number],number);
+            //连接数字高亮信号映射器
+            QObject::connect(blocks[number],SIGNAL(highlight(int)),this,SLOT(showHighlightNumber(int)));
         }
     }
 
@@ -174,4 +176,13 @@ void GameBoard::showHighlightFrame(int number){
     }
     rowFrame[number/9]->setVisible(true);
     columnFrame[number%9]->setVisible(true);
+}
+
+void GameBoard::showHighlightNumber(int number){
+    for(int i=0;i<81;i++){
+        if(blocks[i]->getNumber()==number)
+            blocks[i]->highlightNumber();
+        else
+            blocks[i]->cancelHighlightNumber();
+    }
 }

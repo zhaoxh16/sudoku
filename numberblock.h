@@ -17,6 +17,8 @@ public:
     explicit NumberBlock(QWidget *parent = nullptr);
     void setEditable(bool editable);
     void setNumber(int number);
+    void highlightNumber();
+    void cancelHighlightNumber();
     int getNumber();
 
 signals:

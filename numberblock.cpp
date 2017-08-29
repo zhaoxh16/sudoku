@@ -11,6 +11,9 @@ NumberBlock::NumberBlock(QWidget *parent) : QWidget(parent){
     //设置label
     label = new QLabel(this);
     label->setAlignment(Qt::AlignCenter);
+    QFont ft;
+    ft.setPointSize(25);
+    label->setFont(ft);
     QGridLayout* layout = new QGridLayout(this);
     layout->setSpacing(0);
     layout->setMargin(0);
@@ -179,4 +182,22 @@ void NumberBlock::setNumber(int number){
 
 int NumberBlock::getNumber(){
     return QVariant(label->text()).toInt();
+}
+
+void NumberBlock::highlightNumber(){
+    QFont ft = label->font();
+    ft.setBold(true);
+    label->setFont(ft);
+    QPalette palette = label->palette();
+    palette.setColor(QPalette::WindowText,Qt::red);
+    label->setPalette(palette);
+}
+
+void NumberBlock::cancelHighlightNumber(){
+    QFont ft = label->font();
+    ft.setBold(false);
+    label->setFont(ft);
+    QPalette palette = label->palette();
+    palette.setColor(QPalette::WindowText,Qt::black);
+    label->setPalette(palette);
 }
