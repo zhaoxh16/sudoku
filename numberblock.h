@@ -20,6 +20,8 @@ public:
     void highlightNumber();
     void cancelHighlightNumber();
     int getNumber();
+    bool isEditable();
+    void clear();
 
 signals:
     void moveUp();

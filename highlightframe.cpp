@@ -13,4 +13,5 @@ void HighlightFrame::paintEvent(QPaintEvent *event){
     p->setPen(QPen(QColor(160,32,240),8));
     p->setBrush(Qt::transparent);
     p->drawRect(rect());
+    delete p;
 }

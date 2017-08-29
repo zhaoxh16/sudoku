@@ -201,3 +201,14 @@ void NumberBlock::cancelHighlightNumber(){
     palette.setColor(QPalette::WindowText,Qt::black);
     label->setPalette(palette);
 }
+
+bool NumberBlock::isEditable(){
+    return editable;
+}
+
+void NumberBlock::clear(){
+    label->setText("");
+    for(int i=0;i<9;i++){
+        smallLabel[i]->setText("");
+    }
+}

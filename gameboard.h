@@ -23,6 +23,7 @@ public slots:
     void moveFocus(int number);
     void showHighlightFrame(int number);
     void showHighlightNumber(int number);
+    void restart();
 
 protected:
     NumberBlockPointer blocks[81];

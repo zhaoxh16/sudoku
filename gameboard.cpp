@@ -2,6 +2,7 @@
 
 GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
 {
+    setFixedSize(552, 552);
     //构建布局
     QGridLayout* layout = new QGridLayout;//总的layout
     layout->setMargin(3);
@@ -184,5 +185,13 @@ void GameBoard::showHighlightNumber(int number){
             blocks[i]->highlightNumber();
         else
             blocks[i]->cancelHighlightNumber();
+    }
+}
+
+void GameBoard::restart(){
+    for(int i=0;i<81;i++){
+        if(blocks[i]->isEditable()){
+            blocks[i]->clear();
+        }
     }
 }

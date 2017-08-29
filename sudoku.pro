@@ -28,10 +28,14 @@ SOURCES += \
         mainwindow.cpp \
     gameboard.cpp \
     numberblock.cpp \
-    highlightframe.cpp
+    highlightframe.cpp \
+    mainform.cpp \
+    timer.cpp
 
 HEADERS += \
         mainwindow.h \
     gameboard.h \
     numberblock.h \
-    highlightframe.h
+    highlightframe.h \
+    mainform.h \
+    timer.h

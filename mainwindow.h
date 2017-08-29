@@ -2,8 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "gameboard.h"
-#include <QGridLayout>
+#include "mainform.h"
 
 class MainWindow : public QMainWindow
 {

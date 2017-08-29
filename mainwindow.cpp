@@ -3,8 +3,9 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    GameBoard* gameBoard = new GameBoard(this);
-    setCentralWidget(gameBoard);
+    MainForm* mainform = new MainForm(this);
+    setCentralWidget(mainform);
+    setWindowFlags(windowFlags()& ~Qt::WindowMaximizeButtonHint);
 }
 
 MainWindow::~MainWindow()
