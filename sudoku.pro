@@ -45,3 +45,5 @@ HEADERS += \
     boardcover.h
 
 DISTFILES +=
+
+FORMS +=

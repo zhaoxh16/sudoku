@@ -5,15 +5,24 @@ Timer::Timer(QWidget *parent) : QWidget(parent)
     timer = new QTimer(this);
     record = new QTime(0,0,0);
     connect(timer,SIGNAL(timeout()),this,SLOT(updateTime()));
-    hourLabel = new QLabel("0",this);
-    hourLabel->setFixedSize(40,20);
-    minuteLabel = new QLabel("0",this);
-    minuteLabel->setFixedSize(40,20);
-    secondLabel = new QLabel("0",this);
-    secondLabel->setFixedSize(40,20);
+    hourLabel = new QLabel("00",this);
+    hourLabel->setFixedWidth(20);
+    hourLabel->setAlignment(Qt::AlignCenter);
+    minuteLabel = new QLabel("00",this);
+    minuteLabel->setFixedWidth(20);
+    minuteLabel->setAlignment(Qt::AlignCenter);
+    secondLabel = new QLabel("00",this);
+    secondLabel->setFixedWidth(20);
+    secondLabel->setAlignment(Qt::AlignCenter);
+    QLabel* spacingLabel1 = new QLabel(":",this);
+    QLabel* spacingLabel2 = new QLabel(":",this);
+    spacingLabel2->setScaledContents(true);
     QHBoxLayout* hLayout = new QHBoxLayout;
+    hLayout->setSpacing(0);
     hLayout->addWidget(hourLabel);
+    hLayout->addWidget(spacingLabel1);
     hLayout->addWidget(minuteLabel);
+    hLayout->addWidget(spacingLabel2);
     hLayout->addWidget(secondLabel);
 
     setLayout(hLayout);
@@ -21,10 +30,22 @@ Timer::Timer(QWidget *parent) : QWidget(parent)
 
 void Timer::updateTime(){
     *record = record->addSecs(1);
+
     //更新显示的时间
-    hourLabel->setText(QVariant(record->hour()).toString());
-    minuteLabel->setText(QVariant(record->minute()).toString());
-    secondLabel->setText(QVariant(record->second()).toString());
+    if(record->hour()<10)
+        hourLabel->setText("0"+QVariant(record->hour()).toString());
+    else
+        hourLabel->setText(QVariant(record->hour()).toString());
+
+    if(record->minute()<10)
+        minuteLabel->setText("0"+QVariant(record->minute()).toString());
+    else
+        minuteLabel->setText(QVariant(record->minute()).toString());
+
+    if(record->second()<10)
+        secondLabel->setText("0"+QVariant(record->second()).toString());
+    else
+        secondLabel->setText(QVariant(record->second()).toString());
 }
 
 void Timer::start(){
@@ -38,7 +59,7 @@ void Timer::pause(){
 void Timer::stop(){
     timer->stop();
     record->setHMS(0,0,0);
-    hourLabel->setText("0");
-    minuteLabel->setText("0");
-    secondLabel->setText("0");
+    hourLabel->setText("00");
+    minuteLabel->setText("00");
+    secondLabel->setText("00");
 }

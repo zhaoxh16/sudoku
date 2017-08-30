@@ -5,11 +5,13 @@ MainForm::MainForm(QWidget *parent) : QWidget(parent)
     undoStack = new QUndoStack(this);
     gameBoard = new GameBoard(this);
     timer = new Timer(this);
-    toolBar = new QToolBar("Edit",this);
+
+    //toolBar = new QToolBar("Edit",this);
     QAction* undoAction = undoStack->createUndoAction(this,"undo");
-    toolBar->addAction(undoAction);
+    //toolBar->addAction(undoAction);
     QAction* redoAction = undoStack->createRedoAction(this,"redo");
-    toolBar->addAction(redoAction);
+   // toolBar->addAction(redoAction);
+
     startButton = new QPushButton("start",this);
     startButton->setFocusPolicy(Qt::NoFocus);
     pauseButton = new QPushButton("pause",this);
@@ -44,7 +46,7 @@ MainForm::MainForm(QWidget *parent) : QWidget(parent)
     topLayout->addWidget(markButton);
     topLayout->addWidget(undoButton);
     topLayout->addWidget(redoButton);
-    layout->addWidget(toolBar);
+    //layout->addWidget(toolBar);
     layout->addLayout(topLayout);
     layout->addWidget(gameBoard);
 

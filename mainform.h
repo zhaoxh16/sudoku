@@ -35,7 +35,6 @@ private:
     QPushButton* redoButton;
     QPushButton* markButton;
     QUndoStack* undoStack;
-    QToolBar* toolBar;
 };
 
 #endif // MAINFORM_H
