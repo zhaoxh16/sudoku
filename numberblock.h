@@ -21,9 +21,9 @@ public:
     void cancelHighlightNumber();
     int getNumber();
     bool isEditable();
-    void clear();
-    void addNumbers(int* numbers,int count, bool pushCommand);
-    void deleteNumbers(int* numbers, int count, bool pushCommand);
+    void clear(bool pushCommand = false);
+    void addNumbers(int* numbers,int count, bool pushCommand = false);
+    void deleteNumbers(int* numbers, int count, bool pushCommand = false);
     void mark();
 
 signals:
