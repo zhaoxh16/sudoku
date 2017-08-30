@@ -55,7 +55,7 @@ void NumberBlock::focusOutEvent(QFocusEvent *event){
     Q_UNUSED(event);
     //更改背景颜色
     if(editable){
-        changeBackgroundColor(QColor(135,206,250));
+        changeBackgroundColor(QColor(255,255,255));
     }
 }
 
@@ -67,7 +67,7 @@ void NumberBlock::paintEvent(QPaintEvent *event){
     p->setRenderHint(QPainter::Antialiasing, true);
     //设置画刷颜色
     p->setBrush(Qt::transparent);
-    p->setPen(QColor(0,255,255));
+    p->setPen(Qt::transparent);
     p->drawRect(rect());
     delete p;
 }
@@ -138,7 +138,7 @@ void NumberBlock::cancelHighlightNumber(){
     QFont ft = label->font();
     ft.setBold(false);
     label->setFont(ft);
-    changeBackgroundColor(QColor(135,206,250));
+    changeBackgroundColor(QColor(255,255,255));
 }
 
 bool NumberBlock::isEditable(){

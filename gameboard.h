@@ -9,6 +9,7 @@
 #include <QApplication>
 #include "highlightframe.h"
 #include "numberblock.h"
+#include "boardcover.h"
 
 typedef NumberBlock* NumberBlockPointer;
 
@@ -34,6 +35,7 @@ protected:
     NumberBlockPointer blocks[81];
     HighlightFrame* rowFrame[9];
     HighlightFrame* columnFrame[9];
+    BoardCover* boardCover;
     void paintEvent(QPaintEvent *event);
 };
 

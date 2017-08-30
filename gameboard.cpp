@@ -2,10 +2,10 @@
 
 GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
 {
-    setFixedSize(552, 552);
+    setFixedSize(540,540);
     //构建布局
     QGridLayout* layout = new QGridLayout(this);//总的layout
-    layout->setMargin(3);
+    layout->setMargin(0);
     layout->setSpacing(0);
     QVBoxLayout* vLayout = new QVBoxLayout;//棋盘layout
     vLayout->setSpacing(0);
@@ -90,28 +90,24 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
 
     //构建布局
     layout1->addLayout(blockLayout[0]);
-    layout1->addSpacing(3);
     layout1->addLayout(blockLayout[1]);
-    layout1->addSpacing(3);
     layout1->addLayout(blockLayout[2]);
     layout2->addLayout(blockLayout[3]);
-    layout2->addSpacing(3);
     layout2->addLayout(blockLayout[4]);
-    layout2->addSpacing(3);
     layout2->addLayout(blockLayout[5]);
     layout3->addLayout(blockLayout[6]);
-    layout3->addSpacing(3);
     layout3->addLayout(blockLayout[7]);
-    layout3->addSpacing(3);
     layout3->addLayout(blockLayout[8]);
 
     vLayout->addLayout(layout1);
-    vLayout->addSpacing(3);
     vLayout->addLayout(layout2);
-    vLayout->addSpacing(3);
     vLayout->addLayout(layout3);
 
     layout->addLayout(vLayout,0,0,9,9);
+
+    //添加BoardCover
+    //boardCover = new BoardCover(this);
+    //layout->addWidget(boardCover,0,0,9,9);
 
     //设置highlightframe
     for(int i=0;i<9;i++){
@@ -122,6 +118,7 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
         layout->addWidget(columnFrame[i],0,i,9,1);
         columnFrame[i]->setVisible(false);
     }
+
 
     //设置布局
     setLayout(layout);

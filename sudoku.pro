@@ -31,7 +31,8 @@ SOURCES += \
     highlightframe.cpp \
     mainform.cpp \
     timer.cpp \
-    undomodule.cpp
+    undomodule.cpp \
+    boardcover.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -40,6 +41,7 @@ HEADERS += \
     highlightframe.h \
     mainform.h \
     timer.h \
-    undomodule.h
+    undomodule.h \
+    boardcover.h
 
 DISTFILES +=
