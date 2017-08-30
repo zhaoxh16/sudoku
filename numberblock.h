@@ -22,8 +22,9 @@ public:
     int getNumber();
     bool isEditable();
     void clear();
-    void addNumbers(int* numbers,int count);
-    void deleteNumbers(int* numbers, int count);
+    void addNumbers(int* numbers,int count, bool pushCommand);
+    void deleteNumbers(int* numbers, int count, bool pushCommand);
+    void mark();
 
 signals:
     void moveUp();

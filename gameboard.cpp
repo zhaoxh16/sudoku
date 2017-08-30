@@ -199,3 +199,14 @@ void GameBoard::restart(){
     }
 }
 
+void GameBoard::markFocusBlock(){
+    NumberBlock* focusBlock;
+    QWidget* currentItem = QApplication::focusWidget();
+    if(currentItem!=NULL){
+        if(currentItem->inherits("NumberBlock")){
+            focusBlock = qobject_cast<NumberBlock*>(currentItem);
+            focusBlock->mark();
+        }
+    }
+}
+

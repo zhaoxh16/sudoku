@@ -37,7 +37,7 @@ void NumberBlock::focusInEvent(QFocusEvent *event){
     //更改背景颜色
     if(editable){
         QPalette palette = this->palette();
-        palette.setColor(QPalette::Background, Qt::green);
+        palette.setColor(QPalette::Window, Qt::green);
         this->setPalette(palette);
     }
 
@@ -54,7 +54,7 @@ void NumberBlock::focusOutEvent(QFocusEvent *event){
     //更改背景颜色
     if(editable){
         QPalette palette = this->palette();
-        palette.setColor(QPalette::Background, Qt::transparent);
+        palette.setColor(QPalette::Window, Qt::transparent);
         this->setPalette(palette);
     }
 }
@@ -185,7 +185,7 @@ void NumberBlock::setEditable(bool editable){
     this->editable=editable;
     if(!editable){
         QPalette palette = this->palette();
-        palette.setColor(QPalette::Background, Qt::yellow);
+        palette.setColor(QPalette::Window, Qt::yellow);
         this->setPalette(palette);
     }
 }
@@ -228,7 +228,9 @@ void NumberBlock::clear(){
     usedLabel = 0;
 }
 
-void NumberBlock::addNumbers(int* numbers, int count){
+void NumberBlock::addNumbers(int* numbers, int count, bool pushCommand){
+    if(pushCommand)
+        emit addNumberCommand(numbers,count,this);
     if(usedLabel==0){//如果方格内一开始没有数字
         if(count==1){//最终方格内有一个数字
             label->setText(QVariant(numbers[0]).toString());
@@ -251,7 +253,9 @@ void NumberBlock::addNumbers(int* numbers, int count){
     }
 }
 
-void NumberBlock::deleteNumbers(int* numbers, int count){
+void NumberBlock::deleteNumbers(int* numbers, int count, bool pushCommand){
+    if(pushCommand)
+        emit deleteNumberCommand(numbers,count,this);
     if(usedLabel == 1){
         label->setText("");
         usedLabel = 0;
@@ -276,6 +280,9 @@ void NumberBlock::deleteNumbers(int* numbers, int count){
     }
 }
 
+void NumberBlock::mark(){
+
+}
 
 
 

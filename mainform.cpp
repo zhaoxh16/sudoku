@@ -20,6 +20,8 @@ MainForm::MainForm(QWidget *parent) : QWidget(parent)
     undoButton->setFocusPolicy(Qt::NoFocus);
     redoButton = new QPushButton("redo", this);
     redoButton->setFocusPolicy(Qt::NoFocus);
+    markButton = new QPushButton("mark",this);
+    markButton->setFocusPolicy(Qt::NoFocus);
 
     connect(startButton,SIGNAL(clicked(bool)),timer,SLOT(start()));
     connect(pauseButton,SIGNAL(clicked(bool)),timer,SLOT(pause()));
@@ -28,6 +30,7 @@ MainForm::MainForm(QWidget *parent) : QWidget(parent)
     connect(restartButton,SIGNAL(clicked(bool)),gameBoard,SLOT(restart()));
     connect(undoButton,SIGNAL(clicked(bool)),undoAction,SLOT(trigger()));
     connect(redoButton,SIGNAL(clicked(bool)),redoAction,SLOT(trigger()));
+    connect(markButton,SIGNAL(clicked(bool)),gameBoard,SLOT(markFocusBlock()));
 
     connect(gameBoard,SIGNAL(addNumberCommand(int*,int,NumberBlock*)),this,SLOT(addNumberCommand(int*,int,NumberBlock*)));
     connect(gameBoard,SIGNAL(deleteNumberCommand(int*,int,NumberBlock*)),this,SLOT(deleteNumberCommand(int*,int,NumberBlock*)));
@@ -38,6 +41,7 @@ MainForm::MainForm(QWidget *parent) : QWidget(parent)
     topLayout->addWidget(startButton);
     topLayout->addWidget(pauseButton);
     topLayout->addWidget(restartButton);
+    topLayout->addWidget(markButton);
     topLayout->addWidget(undoButton);
     topLayout->addWidget(redoButton);
     layout->addWidget(toolBar);

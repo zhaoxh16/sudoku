@@ -6,6 +6,7 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QSignalMapper>
+#include <QApplication>
 #include "highlightframe.h"
 #include "numberblock.h"
 
@@ -26,6 +27,7 @@ public slots:
     void showHighlightFrame(int number);
     void showHighlightNumber(int number);
     void restart();
+    void markFocusBlock();
 
 protected:
     NumberBlockPointer blocks[81];
