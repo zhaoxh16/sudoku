@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -32,7 +32,10 @@ SOURCES += \
     mainform.cpp \
     timer.cpp \
     undomodule.cpp \
-    boardcover.cpp
+    boardcover.cpp \
+    database.cpp \
+    chooselevelwidget.cpp \
+    sudokualgorithm.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -42,8 +45,12 @@ HEADERS += \
     mainform.h \
     timer.h \
     undomodule.h \
-    boardcover.h
+    boardcover.h \
+    database.h \
+    chooselevelwidget.h \
+    sudokualgorithm.h
 
 DISTFILES +=
 
-FORMS +=
+FORMS += \
+    chooselevelwidget.ui

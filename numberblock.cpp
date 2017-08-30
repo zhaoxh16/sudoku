@@ -29,19 +29,14 @@ NumberBlock::NumberBlock(QWidget *parent) : QWidget(parent){
             smallLabel[number]->setAlignment(Qt::AlignCenter);
         }
 
-    //设置字体
-    changeLabelTextColor(QColor(205,133,63));
-    changeSmallLabelTextColor(QColor(205,133,63));
-
     setLayout(layout);
 }
 
 void NumberBlock::focusInEvent(QFocusEvent *event){
     Q_UNUSED(event);
     //更改背景颜色
-    if(editable){
-        changeBackgroundColor(Qt::green);
-    }
+    focus = 1;
+    update();
 
     //发送行列、数字高亮信号
     if(label->text()=="")//如果没有数字或有多个数字
@@ -54,9 +49,8 @@ void NumberBlock::focusInEvent(QFocusEvent *event){
 void NumberBlock::focusOutEvent(QFocusEvent *event){
     Q_UNUSED(event);
     //更改背景颜色
-    if(editable){
-        changeBackgroundColor(Qt::white);
-    }
+    focus = 0;
+    update();
 }
 
 void NumberBlock::paintEvent(QPaintEvent *event){
@@ -68,7 +62,31 @@ void NumberBlock::paintEvent(QPaintEvent *event){
     //设置画刷颜色
     p->setBrush(Qt::transparent);
     p->setPen(Qt::transparent);
+
+    if(editable){
+        changeLabelTextColor(Qt::blue);
+        changeSmallLabelTextColor(Qt::blue);
+    }else{
+        changeLabelTextColor(Qt::black);
+        changeSmallLabelTextColor(Qt::black);
+    }
+
+    if(marked){
+        changeLabelTextColor(QColor(255,0,255));
+        changeSmallLabelTextColor(QColor(255,0,255));
+    }
+
+    if(isHighlightPosition)
+        p->setBrush(QColor(0,245,255));
+
+    if(isHighlightNumber)
+        p->setBrush(Qt::yellow);
+
+    if(focus)
+        p->setBrush(Qt::green);
+
     p->drawRect(rect());
+
     delete p;
 }
 
@@ -113,10 +131,7 @@ void NumberBlock::keyPressEvent(QKeyEvent *event){
 
 void NumberBlock::setEditable(bool editable){
     this->editable=editable;
-    if(!editable){
-        changeLabelTextColor(Qt::black);
-    }else
-        changeLabelTextColor(QColor(0,191,255));
+    update();
 }
 
 void NumberBlock::setNumber(int number){
@@ -128,19 +143,13 @@ int NumberBlock::getNumber(){
 }
 
 void NumberBlock::highlightNumber(){
-    QFont ft = label->font();
-    ft.setBold(true);
-    label->setFont(ft);
-    changeBackgroundColor(Qt::yellow);
+    isHighlightNumber = 1;
+    update();
 }
 
 void NumberBlock::cancelHighlightNumber(){
-    if(this->usedLabel==0)
-        return;
-    QFont ft = label->font();
-    ft.setBold(false);
-    label->setFont(ft);
-    changeBackgroundColor(Qt::white);
+    isHighlightNumber = 0;
+    update();
 }
 
 bool NumberBlock::isEditable(){
@@ -203,6 +212,9 @@ void NumberBlock::addNumbers(int* numbers, int count, bool pushCommand){
     for(int i=0;i<count;i++){
         emit highlight(numbers[i]);
     }
+
+    //判断是否已经把数独填完
+    emit judge();
 }
 
 void NumberBlock::deleteNumbers(int* numbers, int count, bool pushCommand){
@@ -233,26 +245,21 @@ void NumberBlock::deleteNumbers(int* numbers, int count, bool pushCommand){
 }
 
 void NumberBlock::mark(){
-    if(marked == 0){
-        changeLabelTextColor(Qt::red);
-        changeSmallLabelTextColor(Qt::red);
+    if(marked == 0)
         marked = 1;
-    }else{
-        if(editable){
-            changeLabelTextColor(QColor(205,133,63));
-            changeSmallLabelTextColor(QColor(205,133,63));
-        }else{
-            changeLabelTextColor(Qt::black);
-            changeSmallLabelTextColor(Qt::black);
-        }
+    else
         marked = 0;
-    }
+    update();
 }
 
-void NumberBlock::changeBackgroundColor(QColor color){
-    QPalette palette = this->palette();
-    palette.setColor(QPalette::Window, color);
-    this->setPalette(palette);
+void NumberBlock::highlightPosition(){
+    isHighlightPosition = 1;
+    update();
+}
+
+void NumberBlock::cancelHighlightPosition(){
+    isHighlightPosition = 0;
+    update();
 }
 
 void NumberBlock::changeLabelTextColor(QColor color){
@@ -269,6 +276,15 @@ void NumberBlock::changeSmallLabelTextColor(QColor color, int number){
             smallLabel[i]->setPalette(palette);
     else
         smallLabel[number]->setPalette(palette);
-
 }
 
+void NumberBlock::reset(){
+    clear();
+    usedLabel = 0;
+    editable = 1;
+    marked = 0;
+    isHighlightNumber = 0;
+    isHighlightPosition = 0;
+    focus = 0;
+    update();
+}

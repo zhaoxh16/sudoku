@@ -63,3 +63,9 @@ void MainForm::addNumberCommand(int *numbers, int count, NumberBlock *block){
 void MainForm::deleteNumberCommand(int *numbers, int count, NumberBlock *block){
     undoStack->push(new DeleteNumberCommand(numbers,count,block));
 }
+
+void MainForm::setLevel(int level){
+    gameBoard->reset();
+    gameBoard->setLevel(level);
+    undoStack->clear();
+}

@@ -2,6 +2,8 @@
 
 GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
 {
+    database=new Database;
+
     setFixedSize(540,540);
     //构建布局
     QGridLayout* layout = new QGridLayout(this);//总的layout
@@ -172,12 +174,26 @@ void GameBoard::paintEvent(QPaintEvent *event){
 }
 
 void GameBoard::showHighlightFrame(int number){
+    int x = number%9;
+    int y = number/9;
+
     for(int i=0;i<9;i++){
         rowFrame[i]->setVisible(false);
         columnFrame[i]->setVisible(false);
     }
-    rowFrame[number/9]->setVisible(true);
-    columnFrame[number%9]->setVisible(true);
+    rowFrame[y]->setVisible(true);
+    columnFrame[x]->setVisible(true);
+
+    for(int i=0;i<81;i++){
+        blocks[i]->cancelHighlightPosition();
+    }
+    y=y*9;
+    for(int i=0;i<9;i++){
+        blocks[x]->highlightPosition();
+        x+=9;
+        blocks[y]->highlightPosition();
+        y+=1;
+    }
 }
 
 void GameBoard::showHighlightNumber(int number){
@@ -216,6 +232,34 @@ void GameBoard::initializeGameBoard(int *numbers){
             blocks[i]->setEditable(false);
             blocks[i]->setNumber(numbers[i]);
         }
+    }
+}
+
+void GameBoard::judge(){//判断数独是否完成
+
+}
+
+void GameBoard::reset(){
+    for(int i=0;i<81;i++)
+        blocks[i]->reset();
+    for(int i=0;i<9;i++){
+        rowFrame[i]->setVisible(false);
+        columnFrame[i]->setVisible(false);
+    }
+}
+
+void GameBoard::setLevel(int level){
+    QString levelName = "default_level_"+QVariant(level).toString();
+    QList<QList<QVariant>> result = database->getData(levelName);
+    QString numbers = result[0][2].toString();
+    QString isEditable = result[0][3].toString();
+    for(int i=0;i<81;i++){
+        QString temp1 = "";
+        QString temp2 = "";
+        blocks[i]->setEditable(QVariant(temp1+isEditable.at(i)).toBool());
+        if(numbers.at(i)=='0')
+            continue;
+        blocks[i]->setNumber(QVariant(temp2+numbers.at(i)).toInt());
     }
 }
 

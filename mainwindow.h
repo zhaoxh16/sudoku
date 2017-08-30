@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "mainform.h"
+#include "chooselevelwidget.h"
 
 class MainWindow : public QMainWindow
 {
@@ -11,6 +12,13 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+public slots:
+    void setLevel(int level);
+
+private:
+    MainForm* mainform;
+    ChooseLevelWidget* chooseLevelWidget;
 };
 
 #endif // MAINWINDOW_H

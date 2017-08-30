@@ -18,6 +18,7 @@ class MainForm : public QWidget
     Q_OBJECT
 public:
     explicit MainForm(QWidget *parent = nullptr);
+    void setLevel(int level);
 
 signals:
 

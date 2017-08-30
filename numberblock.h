@@ -19,12 +19,15 @@ public:
     void setNumber(int number);
     void highlightNumber();
     void cancelHighlightNumber();
+    void highlightPosition();
+    void cancelHighlightPosition();
     int getNumber();
     bool isEditable();
     void clear(bool pushCommand = false);
     void addNumbers(int* numbers,int count, bool pushCommand = false);
     void deleteNumbers(int* numbers, int count, bool pushCommand = false);
     void mark();
+    void reset();
 
 signals:
     void moveUp();
@@ -34,6 +37,7 @@ signals:
     void highlight(int number);
     void addNumberCommand(int* numbers, int count, NumberBlock* thisBlock);//记录所添加的数字
     void deleteNumberCommand(int* numbers, int count, NumberBlock* thisBlock);//记录所删除的数字
+    void judge();
 
 public slots:
 
@@ -51,9 +55,13 @@ private:
 
     QLabel* label;
     QLabel* smallLabel[9];
-    bool editable = 1;
     int usedLabel = 0;
+
+    bool editable = 1;
     bool marked = 0;
+    bool isHighlightNumber = 0;
+    bool isHighlightPosition = 0;
+    bool focus = 0;
 };
 
 #endif // NUMBERBLOCK_H
