@@ -172,6 +172,7 @@ void NumberBlock::clear(bool pushCommand){
 }
 
 void NumberBlock::addNumbers(int* numbers, int count, bool pushCommand){
+    //发送command
     if(pushCommand){//如果pushCommand为真，那么count必定为1
         if(QVariant(numbers[0]).toString()!=label->text()&&
                 QVariant(numbers[0]).toString()!=smallLabel[numbers[0]-1]->text())//如果之前没有这个数字
@@ -179,6 +180,8 @@ void NumberBlock::addNumbers(int* numbers, int count, bool pushCommand){
         else//已经有了就别费工夫了
             return;
     }
+
+    //对方格进行操作
     if(usedLabel==0){//如果方格内一开始没有数字
         if(count==1){//最终方格内有一个数字
             label->setText(QVariant(numbers[0]).toString());
@@ -198,6 +201,11 @@ void NumberBlock::addNumbers(int* numbers, int count, bool pushCommand){
         }for(int i=0;i<count;i++){
             smallLabel[numbers[i]-1]->setText(QVariant(numbers[i]).toString());
         }usedLabel=2;
+    }
+
+    //控制highlight
+    for(int i=0;i<count;i++){
+        emit highlight(numbers[i]);
     }
 }
 
