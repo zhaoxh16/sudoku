@@ -44,10 +44,16 @@ protected:
     void paintEvent(QPaintEvent *event);
     void keyPressEvent(QKeyEvent *event);
 
+private:
+    void changeBackgroundColor(QColor color);
+    void changeLabelTextColor(QColor color);
+    void changeSmallLabelTextColor(QColor color, int number = -1);
+
     QLabel* label;
     QLabel* smallLabel[9];
     bool editable = 1;
     int usedLabel = 0;
+    bool marked = 0;
 };
 
 #endif // NUMBERBLOCK_H

@@ -7,7 +7,7 @@
 class AddNumbersCommand: public QUndoCommand{
 public:
     AddNumbersCommand(int* numbers, int count, NumberBlock* block);
-    //~AddNumbersCommand();
+    ~AddNumbersCommand();
 
     virtual void redo();
 
@@ -22,7 +22,7 @@ private:
 class DeleteNumberCommand: public QUndoCommand{
 public:
     DeleteNumberCommand(int* numbers, int count, NumberBlock* block);
-    //~DeleteNumberCommand();
+    ~DeleteNumberCommand();
 
     virtual void redo();
 

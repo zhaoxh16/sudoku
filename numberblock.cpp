@@ -36,14 +36,12 @@ void NumberBlock::focusInEvent(QFocusEvent *event){
     Q_UNUSED(event);
     //更改背景颜色
     if(editable){
-        QPalette palette = this->palette();
-        palette.setColor(QPalette::Window, Qt::green);
-        this->setPalette(palette);
+        changeBackgroundColor(Qt::green);
     }
 
     //发送行列、数字高亮信号
     if(label->text()=="")//如果没有数字或有多个数字
-        emit highlight(0);
+        emit highlight(-1);
     else//如果只填了一个数字
         emit highlight(QVariant(label->text()).toInt());
 
@@ -53,9 +51,7 @@ void NumberBlock::focusOutEvent(QFocusEvent *event){
     Q_UNUSED(event);
     //更改背景颜色
     if(editable){
-        QPalette palette = this->palette();
-        palette.setColor(QPalette::Window, Qt::transparent);
-        this->setPalette(palette);
+        changeBackgroundColor(QColor(135,206,250));
     }
 }
 
@@ -115,10 +111,9 @@ void NumberBlock::keyPressEvent(QKeyEvent *event){
 void NumberBlock::setEditable(bool editable){
     this->editable=editable;
     if(!editable){
-        QPalette palette = this->palette();
-        palette.setColor(QPalette::Window, Qt::yellow);
-        this->setPalette(palette);
-    }
+        changeLabelTextColor(Qt::black);
+    }else
+        changeLabelTextColor(QColor(0,191,255));
 }
 
 void NumberBlock::setNumber(int number){
@@ -133,18 +128,14 @@ void NumberBlock::highlightNumber(){
     QFont ft = label->font();
     ft.setBold(true);
     label->setFont(ft);
-    QPalette palette = label->palette();
-    palette.setColor(QPalette::WindowText,Qt::red);
-    label->setPalette(palette);
+    changeBackgroundColor(Qt::yellow);
 }
 
 void NumberBlock::cancelHighlightNumber(){
     QFont ft = label->font();
     ft.setBold(false);
     label->setFont(ft);
-    QPalette palette = label->palette();
-    palette.setColor(QPalette::WindowText,Qt::black);
-    label->setPalette(palette);
+    changeBackgroundColor(QColor(135,206,250));
 }
 
 bool NumberBlock::isEditable(){
@@ -237,9 +228,37 @@ void NumberBlock::deleteNumbers(int* numbers, int count, bool pushCommand){
 }
 
 void NumberBlock::mark(){
-
+    if(marked == 0){
+        changeLabelTextColor(Qt::red);
+        changeSmallLabelTextColor(Qt::red);
+        marked = 1;
+    }else{
+        changeLabelTextColor(Qt::black);
+        changeSmallLabelTextColor(Qt::black);
+        marked = 0;
+    }
 }
 
+void NumberBlock::changeBackgroundColor(QColor color){
+    QPalette palette = this->palette();
+    palette.setColor(QPalette::Window, color);
+    this->setPalette(palette);
+}
 
+void NumberBlock::changeLabelTextColor(QColor color){
+    QPalette palette = label->palette();
+    palette.setColor(QPalette::WindowText,color);
+    label->setPalette(palette);
+}
 
+void NumberBlock::changeSmallLabelTextColor(QColor color, int number){
+    QPalette palette = smallLabel[0]->palette();
+    palette.setColor(QPalette::WindowText,color);
+    if(number == -1)
+        for(int i=0;i<9;i++)
+            smallLabel[i]->setPalette(palette);
+    else
+        smallLabel[number]->setPalette(palette);
+
+}
 
