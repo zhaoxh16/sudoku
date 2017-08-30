@@ -236,6 +236,55 @@ void GameBoard::initializeGameBoard(int *numbers){
 }
 
 void GameBoard::judge(){//判断数独是否完成
+    //判断每列是否都是对的
+    bool allColumnRight = 1;
+    for(int i=0;i<9;i++){//行
+        bool columnRight = 1;
+        bool exist[9];
+        for(int j=0;j<9;j++){//初始化数组
+            exist[j]=0;
+        }
+        for(int j=0;j<9;j++){//列
+            int number = blocks[i*9+j]->getNumber();
+            if(exist[number]){
+                columnRight=0;
+                break;
+            }else
+                exist[number]=1;
+        }
+        if(columnRight == 0){
+            allColumnRight = 0;
+            break;
+        }
+    }
+    if(allColumnRight==0)
+        return;
+
+    //判断每行是否都是对的
+    bool allRowRight = 1;
+    for(int i=0;i<9;i++){//列
+        bool rowRight = 1;
+        bool exist[9];
+        for(int j=0;j<9;j++){//初始化数组
+            exist[j]=0;
+        }
+        for(int j=0;j<9;j++){//行
+            int number = blocks[j*9+i]->getNumber();
+            if(exist[number]){
+                rowRight=0;
+                break;
+            }else
+                exist[number]=1;
+        }
+        if(rowRight == 0){
+            allRowRight = 0;
+            break;
+        }
+    }
+    if(allRowRight==0)
+        return;
+
+    //判断每个方格是否都是对的
 
 }
 
@@ -244,7 +293,7 @@ void GameBoard::reset(){
         blocks[i]->reset();
     for(int i=0;i<9;i++){
         rowFrame[i]->setVisible(false);
-        columnFrame[i]->setVisible(false);
+        rowFrame[i]->setVisible(false);
     }
 }
 

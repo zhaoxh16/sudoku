@@ -1,6 +1,8 @@
-#include "sudokualgorithm.h"
+﻿#include "sudokualgorithm.h"
 
-SudokuAlgorithm::SudokuAlgorithm(QObject *parent) : QObject(parent)
+using namespace std;
+
+sudokuAlgorithm::sudokuAlgorithm()
 {
 
 }

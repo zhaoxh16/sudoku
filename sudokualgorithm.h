@@ -1,17 +1,20 @@
-#ifndef SUDOKUALGORITHM_H
+﻿#ifndef SUDOKUALGORITHM_H
 #define SUDOKUALGORITHM_H
 
-#include <QObject>
+#include <stack>
 
-class SudokuAlgorithm : public QObject
+struct status{
+    int number[81];
+};
+
+class sudokuAlgorithm
 {
-    Q_OBJECT
 public:
-    explicit SudokuAlgorithm(QObject *parent = nullptr);
+    sudokuAlgorithm();
 
-signals:
+private:
+    std::stack<status> statusStack;
 
-public slots:
 };
 
 #endif // SUDOKUALGORITHM_H

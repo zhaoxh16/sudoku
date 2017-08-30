@@ -3,7 +3,6 @@
 Database::Database(QObject *parent) : QObject(parent)
 {
     connect();
-
 }
 
 QSqlDatabase* Database::database(){
