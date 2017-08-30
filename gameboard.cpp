@@ -4,7 +4,7 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
 {
     setFixedSize(552, 552);
     //构建布局
-    QGridLayout* layout = new QGridLayout;//总的layout
+    QGridLayout* layout = new QGridLayout(this);//总的layout
     layout->setMargin(3);
     layout->setSpacing(0);
     QVBoxLayout* vLayout = new QVBoxLayout;//棋盘layout
@@ -127,13 +127,14 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
     setLayout(layout);
 
     //temp 设置editable
-
+    /*
     blocks[5]->setEditable(false);
     blocks[5]->setNumber(3);
     blocks[18]->setEditable(false);
     blocks[18]->setNumber(2);
     blocks[35]->setEditable(false);
     blocks[35]->setNumber(9);
+    */
 
 }
 
@@ -206,6 +207,17 @@ void GameBoard::markFocusBlock(){
         if(currentItem->inherits("NumberBlock")){
             focusBlock = qobject_cast<NumberBlock*>(currentItem);
             focusBlock->mark();
+        }
+    }
+}
+
+void GameBoard::initializeGameBoard(int *numbers){
+    for(int i=0;i<81;i++){
+        if(numbers[i]==0)
+            blocks[i]->setEditable(true);
+        else{
+            blocks[i]->setEditable(false);
+            blocks[i]->setNumber(numbers[i]);
         }
     }
 }

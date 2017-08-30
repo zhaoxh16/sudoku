@@ -29,6 +29,10 @@ NumberBlock::NumberBlock(QWidget *parent) : QWidget(parent){
             smallLabel[number]->setAlignment(Qt::AlignCenter);
         }
 
+    //设置字体
+    changeLabelTextColor(QColor(205,133,63));
+    changeSmallLabelTextColor(QColor(205,133,63));
+
     setLayout(layout);
 }
 
@@ -85,7 +89,6 @@ void NumberBlock::keyPressEvent(QKeyEvent *event){
     else{
         if(editable){//方格可编辑
             int *numbers = new int[9];
-            int count = 1;
             switch(key){
             case Qt::Key_1:numbers[0]=1;addNumbers(numbers,1,true);break;
             case Qt::Key_2:numbers[0]=2;addNumbers(numbers,1,true);break;
@@ -233,8 +236,13 @@ void NumberBlock::mark(){
         changeSmallLabelTextColor(Qt::red);
         marked = 1;
     }else{
-        changeLabelTextColor(Qt::black);
-        changeSmallLabelTextColor(Qt::black);
+        if(editable){
+            changeLabelTextColor(QColor(205,133,63));
+            changeSmallLabelTextColor(QColor(205,133,63));
+        }else{
+            changeLabelTextColor(Qt::black);
+            changeSmallLabelTextColor(Qt::black);
+        }
         marked = 0;
     }
 }

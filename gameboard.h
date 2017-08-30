@@ -17,6 +17,7 @@ class GameBoard : public QWidget
     Q_OBJECT
 public:
     explicit GameBoard(QWidget *parent = nullptr);
+    void initializeGameBoard(int* numbers);//设置数独中预先填的数字
 
 signals:
     void addNumberCommand(int* numbers, int count, NumberBlock* block);//记录所添加的数字

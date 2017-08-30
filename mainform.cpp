@@ -35,7 +35,7 @@ MainForm::MainForm(QWidget *parent) : QWidget(parent)
     connect(gameBoard,SIGNAL(addNumberCommand(int*,int,NumberBlock*)),this,SLOT(addNumberCommand(int*,int,NumberBlock*)));
     connect(gameBoard,SIGNAL(deleteNumberCommand(int*,int,NumberBlock*)),this,SLOT(deleteNumberCommand(int*,int,NumberBlock*)));
 
-    QVBoxLayout* layout = new QVBoxLayout;
+    QVBoxLayout* layout = new QVBoxLayout(this);
     QHBoxLayout* topLayout = new QHBoxLayout;
     topLayout->addWidget(timer);
     topLayout->addWidget(startButton);
@@ -48,6 +48,7 @@ MainForm::MainForm(QWidget *parent) : QWidget(parent)
     layout->addLayout(topLayout);
     layout->addWidget(gameBoard);
 
+    //初始化gameBoard
 
 
     setLayout(layout);
