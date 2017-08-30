@@ -55,7 +55,7 @@ void NumberBlock::focusOutEvent(QFocusEvent *event){
     Q_UNUSED(event);
     //更改背景颜色
     if(editable){
-        changeBackgroundColor(QColor(255,255,255));
+        changeBackgroundColor(Qt::white);
     }
 }
 
@@ -135,10 +135,12 @@ void NumberBlock::highlightNumber(){
 }
 
 void NumberBlock::cancelHighlightNumber(){
+    if(this->usedLabel==0)
+        return;
     QFont ft = label->font();
     ft.setBold(false);
     label->setFont(ft);
-    changeBackgroundColor(QColor(255,255,255));
+    changeBackgroundColor(Qt::white);
 }
 
 bool NumberBlock::isEditable(){

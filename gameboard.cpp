@@ -106,8 +106,8 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
     layout->addLayout(vLayout,0,0,9,9);
 
     //添加BoardCover
-    //boardCover = new BoardCover(this);
-    //layout->addWidget(boardCover,0,0,9,9);
+    boardCover = new BoardCover(this);
+    layout->addWidget(boardCover,0,0,9,9);
 
     //设置highlightframe
     for(int i=0;i<9;i++){
