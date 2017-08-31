@@ -33,14 +33,17 @@ private:
     GameBoard* gameBoard;
     Timer* timer;
     QPushButton* startButton;
-    QPushButton* pauseButton;
+    QPushButton* exitButton;
     QPushButton* restartButton;
     QPushButton* undoButton;
     QPushButton* redoButton;
     QPushButton* markButton;
+    QPushButton* deleteButton;
+    QPushButton* hintButton;
     QPushButton* solveButton;
     QUndoStack* undoStack;
     SudokuAlgorithm sudokuAlgorithm;
+    QLabel* title;
 };
 
 #endif // MAINFORM_H

@@ -225,6 +225,17 @@ void GameBoard::markFocusBlock(){
     }
 }
 
+void GameBoard::clearFocusBlock(){
+    NumberBlock* focusBlock;
+    QWidget* currentItem = QApplication::focusWidget();
+    if(currentItem!=NULL){
+        if(currentItem->inherits("NumberBlock")){
+            focusBlock = qobject_cast<NumberBlock*>(currentItem);
+            focusBlock->clear(true);
+        }
+    }
+}
+
 void GameBoard::initializeGameBoard(int *numbers){
     for(int i=0;i<81;i++){
         if(numbers[i]==0)

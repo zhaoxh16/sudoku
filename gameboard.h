@@ -38,6 +38,7 @@ public slots:
     void restart();
     void markFocusBlock();
     void judge();
+    void clearFocusBlock();
 
 protected:
     Database* database;

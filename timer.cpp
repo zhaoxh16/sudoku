@@ -2,33 +2,41 @@
 
 Timer::Timer(QWidget *parent) : QWidget(parent)
 {
-    setFixedWidth(70);
     isPausing = 1;
     timer = new QTimer(this);
     record = new QTime(0,0,0);
     connect(timer,SIGNAL(timeout()),this,SLOT(updateTime()));
-    hourLabel = new QLabel("00",this);
-    hourLabel->setFixedWidth(20);
-    hourLabel->setAlignment(Qt::AlignCenter);
-    minuteLabel = new QLabel("00",this);
-    minuteLabel->setFixedWidth(20);
-    minuteLabel->setAlignment(Qt::AlignCenter);
-    secondLabel = new QLabel("00",this);
-    secondLabel->setFixedWidth(20);
-    secondLabel->setAlignment(Qt::AlignCenter);
-    QLabel* spacingLabel1 = new QLabel(":",this);
-    QLabel* spacingLabel2 = new QLabel(":",this);
-    spacingLabel2->setScaledContents(true);
-    QHBoxLayout* hLayout = new QHBoxLayout;
-    hLayout->setSpacing(0);
-    hLayout->setMargin(0);
-    hLayout->addWidget(hourLabel);
-    hLayout->addWidget(spacingLabel1);
-    hLayout->addWidget(minuteLabel);
-    hLayout->addWidget(spacingLabel2);
-    hLayout->addWidget(secondLabel);
 
-    setLayout(hLayout);
+    hourLabel = new QLabel("00",this);
+    hourLabel->setAlignment(Qt::AlignCenter);
+    hourLabel->setFont(QFont("Academy Engraved LET",28));
+
+    minuteLabel = new QLabel("00",this);
+    minuteLabel->setAlignment(Qt::AlignCenter);
+    minuteLabel->setFont(QFont("Academy Engraved LET",28));
+
+    secondLabel = new QLabel("00",this);
+    secondLabel->setAlignment(Qt::AlignCenter);
+    secondLabel->setFont(QFont("Academy Engraved LET",28));
+
+    QLabel* spacingLabel1 = new QLabel(":",this);
+    spacingLabel1->setAlignment(Qt::AlignCenter);
+    spacingLabel1->setFont(QFont("Academy Engraved LET",28));
+
+    QLabel* spacingLabel2 = new QLabel(":",this);
+    spacingLabel2->setAlignment(Qt::AlignCenter);
+    spacingLabel2->setFont(QFont("Academy Engraved LET",28));
+
+    QHBoxLayout* layout = new QHBoxLayout(this);
+    layout->setSizeConstraint(QLayout::SetFixedSize);
+    layout->addWidget(hourLabel);
+    layout->addWidget(spacingLabel1);
+    layout->addWidget(minuteLabel);
+    layout->addWidget(spacingLabel2);
+    layout->addWidget(secondLabel);
+
+    setLayout(layout);
+
 }
 
 void Timer::updateTime(){
