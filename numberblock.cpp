@@ -74,15 +74,15 @@ void NumberBlock::paintEvent(QPaintEvent *event){
     if(isHighlightPosition)
         p->setBrush(QColor(0,245,255,20));
 
-    if(marked){
-        p->setBrush(QColor(160,32,240,80));
-    }
-
     if(isHighlightNumber)
         p->setBrush(QColor(255,255,0,50));
 
     if(focus)
         p->setBrush(QColor(0,255,0,30));
+
+    if(marked){
+        p->setBrush(QColor(160,32,240,80));
+    }
 
     p->drawRect(rect());
 
@@ -290,11 +290,12 @@ void NumberBlock::reset(){
 
 
 void NumberBlock::changeNumberStatus(int number){
-    int numbers[1];
-    numbers[0] = number;
-    if(QVariant(label->text()).toInt() == number || smallLabel[number-1]->text() != ""){
-        emit deleteNumberCommand(numbers,1,this);
-    }else
-        emit addNumberCommand(numbers,1,this);
-
+    if(editable){
+        int numbers[1];
+        numbers[0] = number;
+        if(QVariant(label->text()).toInt() == number || smallLabel[number-1]->text() != ""){
+            emit deleteNumberCommand(numbers,1,this);
+        }else
+            emit addNumberCommand(numbers,1,this);
+    }
 }
