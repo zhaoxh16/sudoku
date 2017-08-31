@@ -64,8 +64,8 @@ void NumberBlock::paintEvent(QPaintEvent *event){
     p->setPen(Qt::transparent);
 
     if(editable){
-        changeLabelTextColor(Qt::blue);
-        changeSmallLabelTextColor(Qt::blue);
+        changeLabelTextColor(QColor(0,0,255,100));
+        changeSmallLabelTextColor(QColor(0,0,255,100));
     }else{
         changeLabelTextColor(Qt::black);
         changeSmallLabelTextColor(Qt::black);
