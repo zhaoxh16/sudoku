@@ -10,7 +10,7 @@ void HighlightFrame::paintEvent(QPaintEvent *event){
 
     QPainter* p = new QPainter(this);
     p->setRenderHint(QPainter::Antialiasing, true);\
-    p->setPen(QPen(QColor(160,32,240),5));
+    p->setPen(QPen(QColor(0,255,255,150),5));
     p->setBrush(Qt::transparent);
     p->drawRect(rect());
     delete p;

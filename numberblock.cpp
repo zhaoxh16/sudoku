@@ -60,7 +60,7 @@ void NumberBlock::paintEvent(QPaintEvent *event){
     //设置抗锯齿
     p->setRenderHint(QPainter::Antialiasing, true);
     //设置画刷颜色
-    p->setBrush(Qt::white);
+    p->setBrush(QColor(0,245,255,10));
     p->setPen(Qt::transparent);
 
     if(editable){
@@ -72,17 +72,17 @@ void NumberBlock::paintEvent(QPaintEvent *event){
     }
 
     if(isHighlightPosition)
-        p->setBrush(QColor(0,245,255,120));
+        p->setBrush(QColor(0,245,255,20));
 
     if(marked){
         p->setBrush(QColor(160,32,240,80));
     }
 
     if(isHighlightNumber)
-        p->setBrush(QColor(255,255,0,120));
+        p->setBrush(QColor(255,255,0,50));
 
     if(focus)
-        p->setBrush(QColor(0,255,0,100));
+        p->setBrush(QColor(0,255,0,30));
 
     p->drawRect(rect());
 

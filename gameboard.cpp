@@ -164,7 +164,7 @@ void GameBoard::paintEvent(QPaintEvent *event){
     //设置抗锯齿
     p->setRenderHint(QPainter::Antialiasing, true);
     //设置画刷颜色
-    p->setPen(QPen(Qt::black,5));
+    p->setPen(QPen(QColor(0,255,255,150),5));
     p->drawRect(rect());
     p->setPen(QPen(Qt::blue,3));
     p->drawLine(QPoint(width()/3,5),QPoint(width()/3,height()-5));
