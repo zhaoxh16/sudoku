@@ -107,7 +107,7 @@ void NumberBlock::keyPressEvent(QKeyEvent *event){
         if(editable){//方格可编辑
             int *numbers = new int[9];
             switch(key){
-            case Qt::Key_1:numbers[0]=1;addNumbers(numbers,1,true);break;
+            case Qt::Key_1:changeNumberStatus(1,true);break;
             case Qt::Key_2:numbers[0]=2;addNumbers(numbers,1,true);break;
             case Qt::Key_3:numbers[0]=3;addNumbers(numbers,1,true);break;
             case Qt::Key_4:numbers[0]=4;addNumbers(numbers,1,true);break;
@@ -297,4 +297,15 @@ void NumberBlock::reset(){
     isHighlightPosition = 0;
     focus = 0;
     update();
+}
+
+
+void NumberBlock::changeNumberStatus(int number, bool pushCommand){
+    int numbers[1];
+    numbers[0] = number;
+    if(QVariant(label->text()).toInt() == number || smallLabel[number-1]->text() != ""){
+        emit deleteNumberCommand(numbers,1,this);
+    }else
+        emit addNumbersCommand(numbers,1,this);
+
 }

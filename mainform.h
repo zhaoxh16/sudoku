@@ -44,6 +44,7 @@ private:
     QUndoStack* undoStack;
     SudokuAlgorithm sudokuAlgorithm;
     QLabel* title;
+    QPushButton* numberButton[9];
 };
 
 #endif // MAINFORM_H

@@ -2,7 +2,7 @@
 
 MainForm::MainForm(QWidget *parent) : QWidget(parent)
 {
-    setFixedSize(850,660);
+    setFixedSize(940,580);
 
     undoStack = new QUndoStack(this);
     QAction* undoAction = undoStack->createUndoAction(this,"undo");
@@ -13,24 +13,24 @@ MainForm::MainForm(QWidget *parent) : QWidget(parent)
 
     title = new QLabel("Level 10", this);
     title->resize(260,60);
-    title->move(590,40);
+    title->move(680,40);
     title->setFont(QFont("Academy Engraved LET",38));
     title->setStyleSheet("color:blue");
 
     timer = new Timer(this);
-    timer->move(580,120);
+    timer->move(670,110);
 
     startButton = new QPushButton("开始/暂停",this);
     startButton->setFocusPolicy(Qt::NoFocus);
     startButton->resize(211,61);
-    startButton->move(600,210);
+    startButton->move(680,190);
     startButton->setFont(QFont("楷体",18));
     connect(startButton,SIGNAL(clicked(bool)),timer,SLOT(changeState()));
 
     restartButton = new QPushButton("重新开始",this);
     restartButton->setFocusPolicy(Qt::NoFocus);
     restartButton->resize(211,61);
-    restartButton->move(600,290);
+    restartButton->move(680,260);
     restartButton->setFont(QFont("楷体",18));
     connect(restartButton,SIGNAL(clicked(bool)),timer,SLOT(stop()));
     connect(restartButton,SIGNAL(clicked(bool)),timer,SLOT(start()));
@@ -39,52 +39,59 @@ MainForm::MainForm(QWidget *parent) : QWidget(parent)
     exitButton = new QPushButton("主菜单",this);
     exitButton->setFocusPolicy(Qt::NoFocus);
     exitButton->resize(211,61);
-    exitButton->move(600,370);
+    exitButton->move(680,330);
     exitButton->setFont(QFont("楷体",18));
 
     undoButton = new QPushButton("撤销",this);
     undoButton->setFocusPolicy(Qt::NoFocus);
     undoButton->resize(100,40);
-    undoButton->move(600,510);
+    undoButton->move(680,460);
     undoButton->setFont(QFont("华文新魏",14));
     connect(undoButton,SIGNAL(clicked(bool)),undoAction,SLOT(trigger()));
 
     redoButton = new QPushButton("重做", this);
     redoButton->setFocusPolicy(Qt::NoFocus);
     redoButton->resize(100,40);
-    redoButton->move(710,510);
+    redoButton->move(790,460);
     redoButton->setFont(QFont("华文新魏",14));
     connect(redoButton,SIGNAL(clicked(bool)),redoAction,SLOT(trigger()));
 
     markButton = new QPushButton("标记",this);
     markButton->setFocusPolicy(Qt::NoFocus);
     markButton->resize(100,40);
-    markButton->move(600,460);
+    markButton->move(680,410);
     markButton->setFont(QFont("华文新魏",14));
     connect(markButton,SIGNAL(clicked(bool)),gameBoard,SLOT(markFocusBlock()));
 
     deleteButton = new QPushButton("清除",this);
     deleteButton->setFocusPolicy(Qt::NoFocus);
     deleteButton->resize(100,40);
-    deleteButton->move(710,460);
+    deleteButton->move(790,410);
     deleteButton->setFont(QFont("华文新魏",14));
     connect(deleteButton,SIGNAL(clicked(bool)),gameBoard,SLOT(clearFocusBlock()));
 
     hintButton = new QPushButton("提示",this);
     hintButton->setFocusPolicy(Qt::NoFocus);
     hintButton->resize(100,40);
-    hintButton->move(600,590);
+    hintButton->move(680,510);
     hintButton->setFont(QFont("华文新魏",14));
 
     solveButton = new QPushButton("答案",this);
     solveButton->setFocusPolicy(Qt::NoFocus);
     solveButton->resize(100,40);
-    solveButton->move(710,590);
+    solveButton->move(790,510);
     solveButton->setFont(QFont("华文新魏",14));
     connect(solveButton,SIGNAL(clicked(bool)),this,SLOT(solve()));
 
     connect(gameBoard,SIGNAL(addNumberCommand(int*,int,NumberBlock*)),this,SLOT(addNumberCommand(int*,int,NumberBlock*)));
     connect(gameBoard,SIGNAL(deleteNumberCommand(int*,int,NumberBlock*)),this,SLOT(deleteNumberCommand(int*,int,NumberBlock*)));
+
+    for(int i=0;i<9;i++){
+        numberButton[i] = new QPushButton(this);
+        numberButton[i]->setFixedSize(40,40);
+        numberButton[i]->move(590,30+i*60);
+        numberButton[i]->setText(QVariant(i+1).toString());
+    }
 
 }
 

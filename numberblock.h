@@ -27,6 +27,7 @@ public:
     void clear(bool pushCommand = false);
     void addNumbers(int* numbers,int count, bool pushCommand = false);
     void deleteNumbers(int* numbers, int count, bool pushCommand = false);
+    void changeNumberStatus(int number, bool pushCommand = false);
     void mark();
     void reset();
 
