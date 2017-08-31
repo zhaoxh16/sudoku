@@ -274,5 +274,5 @@ state SudokuAlgorithm::getSudoku(int level){
         if(numbers[i]==0)
             nowState.number[i] = 0;
     }
-    return nowState;//这个nowState并不是真正的state，只是一个数组
+    return nowState;//这个nowState并不是真正的能解的，只是为了获取数组临时构造的
 }

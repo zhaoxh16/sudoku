@@ -2,21 +2,28 @@
 
 MainForm::MainForm(QWidget *parent) : QWidget(parent)
 {
-    setFixedWidth(570);
-    undoStack = new QUndoStack(this);
-    gameBoard = new GameBoard(this);
-    timer = new Timer(this);
+    setFixedSize(850,660);
 
-    //toolBar = new QToolBar("Edit",this);
+    undoStack = new QUndoStack(this);
     QAction* undoAction = undoStack->createUndoAction(this,"undo");
-    //toolBar->addAction(undoAction);
     QAction* redoAction = undoStack->createRedoAction(this,"redo");
-   // toolBar->addAction(redoAction);
+
+    gameBoard = new GameBoard(this);
+    gameBoard->move(20,20);
+
+    timer = new Timer(this);
+    timer->move(600,130);
 
     startButton = new QPushButton("start",this);
     startButton->setFocusPolicy(Qt::NoFocus);
+    startButton->resize(211,61);
+    startButton->move(600,210);
+
     pauseButton = new QPushButton("pause",this);
     pauseButton->setFocusPolicy(Qt::NoFocus);
+    pauseButton->resize(211,61);
+    pauseButton->move(600,210);
+
     restartButton = new QPushButton("restart",this);
     restartButton->setFocusPolicy(Qt::NoFocus);
     undoButton = new QPushButton("undo",this);
@@ -28,8 +35,7 @@ MainForm::MainForm(QWidget *parent) : QWidget(parent)
     solveButton = new QPushButton("solve",this);
     solveButton->setFocusPolicy(Qt::NoFocus);
 
-    connect(startButton,SIGNAL(clicked(bool)),timer,SLOT(start()));
-    connect(pauseButton,SIGNAL(clicked(bool)),timer,SLOT(pause()));
+    connect(startButton,SIGNAL(clicked(bool)),timer,SLOT(changeState());
     connect(restartButton,SIGNAL(clicked(bool)),timer,SLOT(stop()));
     connect(restartButton,SIGNAL(clicked(bool)),timer,SLOT(start()));
     connect(restartButton,SIGNAL(clicked(bool)),gameBoard,SLOT(restart()));
@@ -82,7 +88,6 @@ void MainForm::setLevel(int level){
 void MainForm::solve(){
     undoStack->clear();
     int *a = gameBoard->getNumbers();
-    /*
     sudokuAlgorithm.reset();
     state myState = sudokuAlgorithm.initializeState(a);
     //测试
@@ -91,9 +96,6 @@ void MainForm::solve(){
     //sudokuAlgorithm.reset();
     //测试结束
     state newState = sudokuAlgorithm.solve(myState);
-    */
-    state newState = sudokuAlgorithm.getSudoku(9);
-
     int *b = new int[81];
     for(int i=0;i<81;i++){
         for(int j=0;j<9;j++){

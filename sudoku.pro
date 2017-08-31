@@ -53,4 +53,5 @@ HEADERS += \
 DISTFILES +=
 
 FORMS += \
-    chooselevelwidget.ui
+    chooselevelwidget.ui \
+    form.ui

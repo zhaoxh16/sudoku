@@ -3,6 +3,7 @@
 Timer::Timer(QWidget *parent) : QWidget(parent)
 {
     setFixedWidth(70);
+    isPausing = 1;
     timer = new QTimer(this);
     record = new QTime(0,0,0);
     connect(timer,SIGNAL(timeout()),this,SLOT(updateTime()));
@@ -52,10 +53,19 @@ void Timer::updateTime(){
 
 void Timer::start(){
     timer->start(1000);
+    isPausing = 0;
 }
 
 void Timer::pause(){
     timer->stop();
+    isPausing = 1;
+}
+
+void Timer::changeState(){
+    if(isPausing)
+        start();
+    else
+        pause();
 }
 
 void Timer::stop(){

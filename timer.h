@@ -21,6 +21,7 @@ public slots:
     void start();
     void pause();
     void stop();
+    void changeState();
 
 private:
     QTimer* timer;
@@ -28,6 +29,7 @@ private:
     QLabel* hourLabel;
     QLabel* minuteLabel;
     QLabel* secondLabel;
+    bool isPausing;
 };
 
 #endif // TIMER_H

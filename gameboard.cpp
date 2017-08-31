@@ -325,8 +325,6 @@ void GameBoard::setNumbers(int *numbers){
         blocks[i]->clear();
         if(numbers[i]!=0){
             blocks[i]->setNumber(numbers[i]);
-            blocks[i]->setEditable(false);
-        }else
-            blocks[i]->setEditable(true);
+        }
     }
 }
