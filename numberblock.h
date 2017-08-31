@@ -22,6 +22,7 @@ public:
     void highlightPosition();
     void cancelHighlightPosition();
     int getNumber();
+    int getOriginalNumber();
     bool isEditable();
     void clear(bool pushCommand = false);
     void addNumbers(int* numbers,int count, bool pushCommand = false);

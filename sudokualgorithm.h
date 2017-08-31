@@ -2,6 +2,9 @@
 #define SUDOKUALGORITHM_H
 
 #include <stack>
+#include <vector>
+#include <ctime>
+#include <cstdlib>
 
 struct state{
     int number[81];//每个方格中可填的数字（二进制表示）
@@ -14,7 +17,12 @@ class SudokuAlgorithm
 public:
     SudokuAlgorithm();
     state solve(state initialState);
-    state initialState(int* number);
+    state initializeState(int* number);
+    int getSolutionNumber(state initialState);//返回0为无解，1为唯一解，2为多解
+    void reset();//清空stack
+
+    state getCompleteSudoku();//生成一个无空位的数独
+    state getSudoku(int level);//生成一个难度为level的数独题
 
 private:
     std::stack<state> stateStack;
@@ -22,7 +30,6 @@ private:
     state changeState(state initialState, int blockNumber, int number, bool isIn);
     //求出某个二进制数的最靠后的为1的位
     int getFirstSolution(int number);
-
 
 };
 

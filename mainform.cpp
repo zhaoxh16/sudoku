@@ -80,8 +80,15 @@ void MainForm::setLevel(int level){
 }
 
 void MainForm::solve(){
+    undoStack->clear();
     int *a = gameBoard->getNumbers();
-    state myState = sudokuAlgorithm.initialState(a);
+    sudokuAlgorithm.reset();
+    state myState = sudokuAlgorithm.initializeState(a);
+    //测试
+    int solutionNumber = sudokuAlgorithm.getSolutionNumber(myState);
+    qDebug()<<solutionNumber;
+    sudokuAlgorithm.reset();
+    //测试结束
     state newState = sudokuAlgorithm.solve(myState);
     int b[81];
     for(int i=0;i<81;i++){

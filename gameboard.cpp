@@ -315,13 +315,14 @@ void GameBoard::setLevel(int level){
 
 int* GameBoard::getNumbers(){
     for(int i=0;i<81;i++){
-        sudokuNumbers[i] = blocks[i]->getNumber();
+        sudokuNumbers[i] = blocks[i]->getOriginalNumber();
     }
     return sudokuNumbers;
 }
 
 void GameBoard::setNumbers(int numbers[81]){
     for(int i=0;i<81;i++){
+        blocks[i]->clear();
         blocks[i]->setNumber(numbers[i]);
     }
 }

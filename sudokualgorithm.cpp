@@ -120,13 +120,13 @@ state SudokuAlgorithm::changeState(state initialState, int blockNumber, int numb
 
 int SudokuAlgorithm::getFirstSolution(int number){
     for(int i=0;i<9;i++){
-        if((number>>i)&1==1)
+        if(((number>>i)&1)==1)
             return i+1;
     }
     return 0;
 }
 
-state SudokuAlgorithm::initialState(int* number){
+state SudokuAlgorithm::initializeState(int* number){
     state myState;
     myState.blank = 81;
     for(int i=0;i<81;i++){
@@ -137,4 +137,85 @@ state SudokuAlgorithm::initialState(int* number){
         myState=changeState(myState,i,number[i],true);
     }
     return myState;
+}
+
+int SudokuAlgorithm::getSolutionNumber(state initialState){
+    if(initialState.blank==solve(initialState).blank)
+        return 0;
+    else{
+        if(stateStack.empty())
+            return 1;
+        state nowState = stateStack.top();
+        stateStack.pop();
+        if(nowState.blank==solve(nowState).blank)
+            return 1;
+        else
+            return 2;
+    }
+}
+
+void SudokuAlgorithm::reset(){
+    while(!stateStack.empty())
+        stateStack.pop();
+}
+
+state SudokuAlgorithm::getCompleteSudoku(){
+    srand(unsigned(time(NULL)));
+    reset();
+    //1. 设置初始状态
+    int number = 1;
+    int bigBlockNumber = 0;
+    state nowState;
+    nowState.blank = 81;
+    for(int i=0;i<81;i++){
+        nowState.number[i]=1023;
+        nowState.solutionNumber[i]=9;
+    }
+
+    while(1){
+        //2. 搜索允许填number的格子
+        int firstNumber = bigBlockNumber/3*27+bigBlockNumber%3*3;//该九宫格第一个格子的编号
+        vector<int> allowedBlockNumber;
+        for(int i=0;i<9;i++){
+            int changeNumber = i/3*9+i%3+firstNumber;
+            //该格子是否能填该数字
+            if(nowState.solutionNumber[changeNumber]!=-1)
+                if(((nowState.number[changeNumber]>>(number-1))&1)==1)
+                    allowedBlockNumber.push_back(changeNumber);
+        }
+
+        //3. 判断是否有能填该数字的格子
+        if(allowedBlockNumber.size()==0){
+            nowState = stateStack.top();
+            stateStack.pop();
+            //回滚
+            if(bigBlockNumber != 0)
+                --bigBlockNumber;
+            else{
+                bigBlockNumber = 8;
+                --number;
+            }
+            continue;
+        }
+
+        //4. 生成随机数
+        int randomNumber = rand()%allowedBlockNumber.size();
+        int blockNumber = allowedBlockNumber[randomNumber];
+
+        //5. 将不填该数字的状态push
+        stateStack.push(changeState(nowState,blockNumber,number,false));
+
+        //6. 填入该数字
+        nowState = changeState(nowState,blockNumber,number,true);
+
+        //7. 判断
+        if(number == 9&& bigBlockNumber == 8)
+            break;
+        else if(bigBlockNumber == 8){
+            ++number;
+            bigBlockNumber = 0;
+        }else
+            ++bigBlockNumber;
+    }
+    return nowState;
 }

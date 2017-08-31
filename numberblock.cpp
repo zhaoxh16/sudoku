@@ -145,6 +145,13 @@ int NumberBlock::getNumber(){
         return QVariant(label->text()).toInt();
 }
 
+int NumberBlock::getOriginalNumber(){
+    if(editable){
+        return 0;
+    }else
+        return getNumber();
+}
+
 void NumberBlock::highlightNumber(){
     isHighlightNumber = 1;
     update();

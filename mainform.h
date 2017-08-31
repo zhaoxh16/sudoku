@@ -11,6 +11,7 @@
 #include <QHBoxLayout>
 #include <QUndoStack>
 #include <QToolBar>
+#include <QDebug>
 #include "sudokualgorithm.h"
 #include "undomodule.h"
 
