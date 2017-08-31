@@ -24,7 +24,7 @@ public:
     void reset();
     void setLevel(int level);
     int* getNumbers();
-    void setNumbers(int numbers[81]);
+    void setNumbers(int *numbers);
 
 
 signals:

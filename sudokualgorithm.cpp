@@ -133,8 +133,15 @@ state SudokuAlgorithm::initializeState(int* number){
         myState.number[i]=1023;
         myState.solutionNumber[i]=9;
     }
+    //temp
+    int testNumbers[81];
     for(int i=0;i<81;i++){
-        myState=changeState(myState,i,number[i],true);
+        testNumbers[i]=number[i];
+    }
+    //temp end
+    for(int i=0;i<81;i++){
+        if(number[i]!=0)
+            myState=changeState(myState,i,number[i],true);
     }
     return myState;
 }
@@ -218,4 +225,54 @@ state SudokuAlgorithm::getCompleteSudoku(){
             ++bigBlockNumber;
     }
     return nowState;
+}
+
+state SudokuAlgorithm::getSudoku(int level){
+    //生成一个完整解
+    state initialState = getCompleteSudoku();
+    state nowState;
+    int numbers[81];
+    for(int i=0;i<81;i++){
+        for(int j=0;j<9;j++){
+            if(initialState.number[i]==1){
+                numbers[i]=j+1;
+                break;
+            }
+            else
+                initialState.number[i]/=2;
+        }
+    }
+    //生成一个随机数列
+    srand(unsigned(time(NULL)));
+    vector<int> series;
+    for(int i=0;i<81;i++){
+        series.push_back(i);
+    }
+    for(int i=0;i<10000;i++)
+        swap(series[rand()%81],series[rand()%81]);
+
+    //开始挖洞
+    int total = 0;//一共挖去的洞的数量
+    for(int i=0;i<81;i++){
+        int blockNumber = series[i];
+        int number = numbers[blockNumber];
+        numbers[blockNumber] = 0;
+        reset();
+        nowState = initializeState(numbers);
+        if(getSolutionNumber(nowState) == 1){
+            ++total;
+            if(total == level*8)
+                break;
+            continue;
+        }
+        else{
+            numbers[blockNumber] = number;
+        }
+    }
+    nowState = initializeState(numbers);
+    for(int i=0;i<81;i++){
+        if(numbers[i]==0)
+            nowState.number[i] = 0;
+    }
+    return nowState;//这个nowState并不是真正的state，只是一个数组
 }

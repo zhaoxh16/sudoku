@@ -320,9 +320,13 @@ int* GameBoard::getNumbers(){
     return sudokuNumbers;
 }
 
-void GameBoard::setNumbers(int numbers[81]){
+void GameBoard::setNumbers(int *numbers){
     for(int i=0;i<81;i++){
         blocks[i]->clear();
-        blocks[i]->setNumber(numbers[i]);
+        if(numbers[i]!=0){
+            blocks[i]->setNumber(numbers[i]);
+            blocks[i]->setEditable(false);
+        }else
+            blocks[i]->setEditable(true);
     }
 }
