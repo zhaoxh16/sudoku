@@ -14,7 +14,7 @@ void BoardCover::paintEvent(QPaintEvent *event){
     //设置画刷颜色
     p->setBrush(Qt::transparent);
     //边框
-    p->setPen(QPen(Qt::blue,5));
+    p->setPen(QPen(Qt::black,5));
     p->drawRect(rect());
     //画九个小九宫格之间的线条
     p->setPen(QPen(Qt::green,3));

@@ -2,6 +2,7 @@
 
 Timer::Timer(QWidget *parent) : QWidget(parent)
 {
+    setFixedWidth(70);
     timer = new QTimer(this);
     record = new QTime(0,0,0);
     connect(timer,SIGNAL(timeout()),this,SLOT(updateTime()));
@@ -19,6 +20,7 @@ Timer::Timer(QWidget *parent) : QWidget(parent)
     spacingLabel2->setScaledContents(true);
     QHBoxLayout* hLayout = new QHBoxLayout;
     hLayout->setSpacing(0);
+    hLayout->setMargin(0);
     hLayout->addWidget(hourLabel);
     hLayout->addWidget(spacingLabel1);
     hLayout->addWidget(minuteLabel);

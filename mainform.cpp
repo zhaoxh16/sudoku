@@ -2,6 +2,7 @@
 
 MainForm::MainForm(QWidget *parent) : QWidget(parent)
 {
+    setFixedWidth(570);
     undoStack = new QUndoStack(this);
     gameBoard = new GameBoard(this);
     timer = new Timer(this);
@@ -38,14 +39,17 @@ MainForm::MainForm(QWidget *parent) : QWidget(parent)
     connect(gameBoard,SIGNAL(deleteNumberCommand(int*,int,NumberBlock*)),this,SLOT(deleteNumberCommand(int*,int,NumberBlock*)));
 
     QVBoxLayout* layout = new QVBoxLayout(this);
-    QHBoxLayout* topLayout = new QHBoxLayout;
-    topLayout->addWidget(timer);
-    topLayout->addWidget(startButton);
-    topLayout->addWidget(pauseButton);
-    topLayout->addWidget(restartButton);
-    topLayout->addWidget(markButton);
-    topLayout->addWidget(undoButton);
-    topLayout->addWidget(redoButton);
+    QGridLayout* topLayout = new QGridLayout;
+    topLayout->setMargin(0);
+    topLayout->setSpacing(1);
+
+    topLayout->addWidget(timer,0,0);
+    topLayout->addWidget(startButton,0,1);
+    topLayout->addWidget(pauseButton,0,2);
+    topLayout->addWidget(restartButton,0,3);
+    topLayout->addWidget(markButton,0,4);
+    topLayout->addWidget(undoButton,0,5);
+    topLayout->addWidget(redoButton,0,6);
     //layout->addWidget(toolBar);
     layout->addLayout(topLayout);
     layout->addWidget(gameBoard);
@@ -68,4 +72,5 @@ void MainForm::setLevel(int level){
     gameBoard->reset();
     gameBoard->setLevel(level);
     undoStack->clear();
+    timer->start();
 }
