@@ -39,6 +39,7 @@ public slots:
     void markFocusBlock();
     void judge();
     void clearFocusBlock();
+    void changeNumberOnFocusBlock(int number);
 
 protected:
     Database* database;

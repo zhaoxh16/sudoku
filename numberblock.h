@@ -24,10 +24,10 @@ public:
     int getNumber();
     int getOriginalNumber();
     bool isEditable();
-    void clear(bool pushCommand = false);
-    void addNumbers(int* numbers,int count, bool pushCommand = false);
-    void deleteNumbers(int* numbers, int count, bool pushCommand = false);
-    void changeNumberStatus(int number, bool pushCommand = false);
+    void clear();
+    void addNumbers(int* numbers,int count);
+    void deleteNumbers(int* numbers, int count);
+    void changeNumberStatus(int number);
     void mark();
     void reset();
 

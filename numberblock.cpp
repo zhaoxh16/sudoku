@@ -105,20 +105,19 @@ void NumberBlock::keyPressEvent(QKeyEvent *event){
     }
     else{
         if(editable){//方格可编辑
-            int *numbers = new int[9];
             switch(key){
-            case Qt::Key_1:changeNumberStatus(1,true);break;
-            case Qt::Key_2:numbers[0]=2;addNumbers(numbers,1,true);break;
-            case Qt::Key_3:numbers[0]=3;addNumbers(numbers,1,true);break;
-            case Qt::Key_4:numbers[0]=4;addNumbers(numbers,1,true);break;
-            case Qt::Key_5:numbers[0]=5;addNumbers(numbers,1,true);break;
-            case Qt::Key_6:numbers[0]=6;addNumbers(numbers,1,true);break;
-            case Qt::Key_7:numbers[0]=7;addNumbers(numbers,1,true);break;
-            case Qt::Key_8:numbers[0]=8;addNumbers(numbers,1,true);break;
-            case Qt::Key_9:numbers[0]=9;addNumbers(numbers,1,true);break;
+            case Qt::Key_1:changeNumberStatus(1);break;
+            case Qt::Key_2:changeNumberStatus(2);break;
+            case Qt::Key_3:changeNumberStatus(3);break;
+            case Qt::Key_4:changeNumberStatus(4);break;
+            case Qt::Key_5:changeNumberStatus(5);break;
+            case Qt::Key_6:changeNumberStatus(6);break;
+            case Qt::Key_7:changeNumberStatus(7);break;
+            case Qt::Key_8:changeNumberStatus(8);break;
+            case Qt::Key_9:changeNumberStatus(9);break;
             case Qt::Key_Delete:
             case Qt::Key_Backspace:
-                clear(true);break;
+                clear();break;
 
             }
         }
@@ -166,7 +165,7 @@ bool NumberBlock::isEditable(){
     return editable;
 }
 
-void NumberBlock::clear(bool pushCommand){
+void NumberBlock::clear(){
     int *numbers = new int[9];
     int count = 0;
     if(usedLabel == 0)
@@ -174,7 +173,7 @@ void NumberBlock::clear(bool pushCommand){
     else if(usedLabel == 1){
         numbers[0] = QVariant(label->text()).toInt();
         count = 1;
-        deleteNumbers(numbers,count,pushCommand);
+        emit deleteNumberCommand(numbers,count,this);
     }else{
         for(int i=0;i<9;i++){
             if(smallLabel[i]->text()!=""){
@@ -182,19 +181,11 @@ void NumberBlock::clear(bool pushCommand){
                 ++count;
             }
         }
-        deleteNumbers(numbers,count,pushCommand);
+        emit deleteNumberCommand(numbers,count,this);
     }
 }
 
-void NumberBlock::addNumbers(int* numbers, int count, bool pushCommand){
-    //发送command
-    if(pushCommand){//如果pushCommand为真，那么count必定为1
-        if(QVariant(numbers[0]).toString()!=label->text()&&
-                QVariant(numbers[0]).toString()!=smallLabel[numbers[0]-1]->text())//如果之前没有这个数字
-        emit addNumberCommand(numbers,count,this);
-        else//已经有了就别费工夫了
-            return;
-    }
+void NumberBlock::addNumbers(int* numbers, int count){
 
     //对方格进行操作
     if(usedLabel==0){//如果方格内一开始没有数字
@@ -227,7 +218,7 @@ void NumberBlock::addNumbers(int* numbers, int count, bool pushCommand){
     emit judge();
 }
 
-void NumberBlock::deleteNumbers(int* numbers, int count, bool pushCommand){
+void NumberBlock::deleteNumbers(int* numbers, int count){
     if(usedLabel == 1){
         label->setText("");
         usedLabel = 0;
@@ -250,8 +241,6 @@ void NumberBlock::deleteNumbers(int* numbers, int count, bool pushCommand){
             usedLabel = 1;
         }
     }
-    if(pushCommand)
-        emit deleteNumberCommand(numbers,count,this);
 }
 
 void NumberBlock::mark(){
@@ -300,12 +289,12 @@ void NumberBlock::reset(){
 }
 
 
-void NumberBlock::changeNumberStatus(int number, bool pushCommand){
+void NumberBlock::changeNumberStatus(int number){
     int numbers[1];
     numbers[0] = number;
     if(QVariant(label->text()).toInt() == number || smallLabel[number-1]->text() != ""){
         emit deleteNumberCommand(numbers,1,this);
     }else
-        emit addNumbersCommand(numbers,1,this);
+        emit addNumberCommand(numbers,1,this);
 
 }

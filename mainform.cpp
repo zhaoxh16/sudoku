@@ -86,11 +86,16 @@ MainForm::MainForm(QWidget *parent) : QWidget(parent)
     connect(gameBoard,SIGNAL(addNumberCommand(int*,int,NumberBlock*)),this,SLOT(addNumberCommand(int*,int,NumberBlock*)));
     connect(gameBoard,SIGNAL(deleteNumberCommand(int*,int,NumberBlock*)),this,SLOT(deleteNumberCommand(int*,int,NumberBlock*)));
 
+    QSignalMapper* mapper= new QSignalMapper(this);
     for(int i=0;i<9;i++){
         numberButton[i] = new QPushButton(this);
         numberButton[i]->setFixedSize(40,40);
         numberButton[i]->move(590,30+i*60);
+        numberButton[i]->setFocusPolicy(Qt::NoFocus);
         numberButton[i]->setText(QVariant(i+1).toString());
+        connect(numberButton[i],SIGNAL(clicked(bool)),mapper,SLOT(map()));
+        mapper->setMapping(numberButton[i],i+1);
+        connect(mapper,SIGNAL(mapped(int)),gameBoard,SLOT(changeNumberOnFocusBlock(int)));
     }
 
 }

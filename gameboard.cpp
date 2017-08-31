@@ -231,7 +231,19 @@ void GameBoard::clearFocusBlock(){
     if(currentItem!=NULL){
         if(currentItem->inherits("NumberBlock")){
             focusBlock = qobject_cast<NumberBlock*>(currentItem);
-            focusBlock->clear(true);
+            focusBlock->clear();
+        }
+    }
+}
+
+
+void GameBoard::changeNumberOnFocusBlock(int number){
+    NumberBlock* focusBlock;
+    QWidget* currentItem = QApplication::focusWidget();
+    if(currentItem!=NULL){
+        if(currentItem->inherits("NumberBlock")){
+            focusBlock = qobject_cast<NumberBlock*>(currentItem);
+            focusBlock->changeNumberStatus(number);
         }
     }
 }

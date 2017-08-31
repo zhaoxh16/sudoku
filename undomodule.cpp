@@ -11,11 +11,11 @@ AddNumbersCommand::~AddNumbersCommand(){
 }
 
 void AddNumbersCommand::redo(){
-    block->addNumbers(numbers,count,false);
+    block->addNumbers(numbers,count);
 }
 
 void AddNumbersCommand::undo(){
-    block->deleteNumbers(numbers,count,false);
+    block->deleteNumbers(numbers,count);
 }
 
 DeleteNumberCommand::DeleteNumberCommand(int* numbers, int count, NumberBlock* block):QUndoCommand("Delete Number"){
@@ -29,9 +29,9 @@ DeleteNumberCommand::~DeleteNumberCommand(){
 }
 
 void DeleteNumberCommand::redo(){
-    block->deleteNumbers(numbers,count,false);
+    block->deleteNumbers(numbers,count);
 }
 
 void DeleteNumberCommand::undo(){
-    block->addNumbers(numbers,count,false);
+    block->addNumbers(numbers,count);
 }
