@@ -135,10 +135,14 @@ void NumberBlock::setEditable(bool editable){
 
 void NumberBlock::setNumber(int number){
     label->setText(QVariant(number).toString());
+    usedLabel = 1;
 }
 
 int NumberBlock::getNumber(){
-    return QVariant(label->text()).toInt();
+    if(label->text()=="")
+        return 0;
+    else
+        return QVariant(label->text()).toInt();
 }
 
 void NumberBlock::highlightNumber(){

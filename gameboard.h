@@ -23,6 +23,9 @@ public:
     void initializeGameBoard(int* numbers);//设置数独中预先填的数字
     void reset();
     void setLevel(int level);
+    int* getNumbers();
+    void setNumbers(int numbers[81]);
+
 
 signals:
     void addNumberCommand(int* numbers, int count, NumberBlock* block);//记录所添加的数字
@@ -43,6 +46,7 @@ protected:
     HighlightFrame* columnFrame[9];
     BoardCover* boardCover;
     void paintEvent(QPaintEvent *event);
+    int* sudokuNumbers;
 };
 
 #endif // GAMEBOARD_H

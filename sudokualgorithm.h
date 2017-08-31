@@ -14,6 +14,7 @@ class SudokuAlgorithm
 public:
     SudokuAlgorithm();
     state solve(state initialState);
+    state initialState(int* number);
 
 private:
     std::stack<state> stateStack;

@@ -3,6 +3,7 @@
 GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
 {
     database=new Database;
+    sudokuNumbers = new int[81];
 
     setFixedSize(540,540);
     //构建布局
@@ -312,3 +313,15 @@ void GameBoard::setLevel(int level){
     }
 }
 
+int* GameBoard::getNumbers(){
+    for(int i=0;i<81;i++){
+        sudokuNumbers[i] = blocks[i]->getNumber();
+    }
+    return sudokuNumbers;
+}
+
+void GameBoard::setNumbers(int numbers[81]){
+    for(int i=0;i<81;i++){
+        blocks[i]->setNumber(numbers[i]);
+    }
+}

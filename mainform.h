@@ -11,6 +11,7 @@
 #include <QHBoxLayout>
 #include <QUndoStack>
 #include <QToolBar>
+#include "sudokualgorithm.h"
 #include "undomodule.h"
 
 class MainForm : public QWidget
@@ -25,6 +26,7 @@ signals:
 public slots:
     void addNumberCommand(int* numbers, int count, NumberBlock* block);//记录所添加的数字
     void deleteNumberCommand(int* numbers, int count, NumberBlock* block);//记录所删除的数字
+    void solve();
 
 private:
     GameBoard* gameBoard;
@@ -35,7 +37,9 @@ private:
     QPushButton* undoButton;
     QPushButton* redoButton;
     QPushButton* markButton;
+    QPushButton* solveButton;
     QUndoStack* undoStack;
+    SudokuAlgorithm sudokuAlgorithm;
 };
 
 #endif // MAINFORM_H
