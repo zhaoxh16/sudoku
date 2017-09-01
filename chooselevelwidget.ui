@@ -13,12 +13,12 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>30</x>
      <y>50</y>
-     <width>331</width>
+     <width>321</width>
      <height>204</height>
     </rect>
    </property>
@@ -64,6 +64,13 @@
       </property>
      </widget>
     </item>
+    <item row="2" column="2">
+     <widget class="QPushButton" name="pushButton_9">
+      <property name="text">
+       <string>Level9</string>
+      </property>
+     </widget>
+    </item>
     <item row="1" column="2">
      <widget class="QPushButton" name="pushButton_6">
       <property name="text">
@@ -82,34 +89,6 @@
      <widget class="QPushButton" name="pushButton_8">
       <property name="text">
        <string>Level8</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="2">
-     <widget class="QPushButton" name="pushButton_9">
-      <property name="text">
-       <string>Level9</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QPushButton" name="pushButton_10">
-      <property name="text">
-       <string>Level10</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="QPushButton" name="pushButton_11">
-      <property name="text">
-       <string>Level11</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="2">
-     <widget class="QPushButton" name="pushButton_12">
-      <property name="text">
-       <string>Level12</string>
       </property>
      </widget>
     </item>

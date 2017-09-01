@@ -15,12 +15,9 @@ ChooseLevelWidget::ChooseLevelWidget(QWidget *parent) :
     pushButton[6]=ui->pushButton_7;
     pushButton[7]=ui->pushButton_8;
     pushButton[8]=ui->pushButton_9;
-    pushButton[9]=ui->pushButton_10;
-    pushButton[10]=ui->pushButton_11;
-    pushButton[11]=ui->pushButton_12;
 
     QSignalMapper* mapper = new QSignalMapper;
-    for(int i=0;i<12;i++){
+    for(int i=0;i<9;i++){
         connect(pushButton[i],SIGNAL(clicked(bool)),mapper,SLOT(map()));
         mapper->setMapping(pushButton[i],i+1);
     }
