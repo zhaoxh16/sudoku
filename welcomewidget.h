@@ -1,7 +1,8 @@
-#ifndef WELCOMEWIDGET_H
+﻿#ifndef WELCOMEWIDGET_H
 #define WELCOMEWIDGET_H
 
 #include <QWidget>
+#include <QPainter>
 
 namespace Ui {
 class WelcomeWidget;
@@ -14,6 +15,14 @@ class WelcomeWidget : public QWidget
 public:
     explicit WelcomeWidget(QWidget *parent = 0);
     ~WelcomeWidget();
+
+protected:
+    void paintEvent(QPaintEvent *event);
+
+signals:
+    void start();
+    void load();
+    void option();
 
 private:
     Ui::WelcomeWidget *ui;

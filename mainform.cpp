@@ -101,8 +101,8 @@ MainForm::MainForm(QWidget *parent) : QWidget(parent)
         numberButton[i]->setStyleSheet("background:rgb(0,225,255,50)");
         connect(numberButton[i],SIGNAL(clicked(bool)),mapper,SLOT(map()));
         mapper->setMapping(numberButton[i],i+1);
-        connect(mapper,SIGNAL(mapped(int)),gameBoard,SLOT(changeNumberOnFocusBlock(int)));
     }
+    connect(mapper,SIGNAL(mapped(int)),gameBoard,SLOT(changeNumberOnFocusBlock(int)));
 
     setStyleSheet(".QPushButton{background:rgb(0,225,255,50)}");
 

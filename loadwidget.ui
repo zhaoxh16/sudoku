@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>WelcomeWidget</class>
- <widget class="QWidget" name="WelcomeWidget">
+ <class>LoadWidget</class>
+ <widget class="QWidget" name="LoadWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>50</y>
+     <y>60</y>
      <width>361</width>
      <height>71</height>
     </rect>
@@ -28,8 +28,8 @@
       <colorrole role="WindowText">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>167</red>
-         <green>44</green>
+         <red>44</red>
+         <green>157</green>
          <blue>255</blue>
         </color>
        </brush>
@@ -39,8 +39,8 @@
       <colorrole role="WindowText">
        <brush brushstyle="SolidPattern">
         <color alpha="255">
-         <red>167</red>
-         <green>44</green>
+         <red>44</red>
+         <green>157</green>
          <blue>255</blue>
         </color>
        </brush>
@@ -62,11 +62,11 @@
    <property name="font">
     <font>
      <family>华文行楷</family>
-     <pointsize>48</pointsize>
+     <pointsize>28</pointsize>
     </font>
    </property>
    <property name="text">
-    <string>Sudoku</string>
+    <string>读取记录</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -75,77 +75,27 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>95</x>
-     <y>160</y>
-     <width>171</width>
-     <height>61</height>
+     <x>90</x>
+     <y>420</y>
+     <width>71</width>
+     <height>28</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <family>楷体</family>
-     <pointsize>14</pointsize>
-    </font>
-   </property>
    <property name="text">
-    <string>开始游戏</string>
+    <string>确定</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_2">
    <property name="geometry">
     <rect>
-     <x>95</x>
-     <y>230</y>
-     <width>171</width>
-     <height>61</height>
+     <x>200</x>
+     <y>420</y>
+     <width>71</width>
+     <height>28</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <family>楷体</family>
-     <pointsize>14</pointsize>
-    </font>
-   </property>
    <property name="text">
-    <string>载入游戏</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_3">
-   <property name="geometry">
-    <rect>
-     <x>95</x>
-     <y>300</y>
-     <width>171</width>
-     <height>61</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>楷体</family>
-     <pointsize>14</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>游戏设置</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_4">
-   <property name="geometry">
-    <rect>
-     <x>95</x>
-     <y>370</y>
-     <width>171</width>
-     <height>61</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>楷体</family>
-     <pointsize>14</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>退出游戏</string>
+    <string>返回</string>
    </property>
   </widget>
  </widget>

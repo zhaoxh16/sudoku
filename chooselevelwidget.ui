@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>372</width>
-    <height>351</height>
+    <width>360</width>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,10 +16,10 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>100</y>
-     <width>371</width>
-     <height>231</height>
+     <x>30</x>
+     <y>160</y>
+     <width>301</width>
+     <height>261</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -84,7 +84,7 @@
      <widget class="QPushButton" name="pushButton_3">
       <property name="minimumSize">
        <size>
-        <width>100</width>
+        <width>0</width>
         <height>62</height>
        </size>
       </property>
@@ -145,7 +145,7 @@
      <widget class="QPushButton" name="pushButton_2">
       <property name="minimumSize">
        <size>
-        <width>100</width>
+        <width>0</width>
         <height>62</height>
        </size>
       </property>
@@ -162,15 +162,21 @@
     </item>
     <item row="0" column="0">
      <widget class="QPushButton" name="pushButton">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="minimumSize">
        <size>
-        <width>100</width>
+        <width>0</width>
         <height>62</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>50</width>
+        <width>100</width>
         <height>62</height>
        </size>
       </property>
@@ -185,8 +191,8 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>20</y>
-     <width>371</width>
+     <y>60</y>
+     <width>361</width>
      <height>71</height>
     </rect>
    </property>
