@@ -26,10 +26,12 @@ bool Database::connect(QString name){
             //如果不存在Sudoku表则创建
             qDebug()<<"Sudoku table not exist";
             if(!query.exec("CREATE TABLE Sudoku("
-                           "Id int,"
+                           "Date varchar,"
                            "Name varchar,"
                            "Numbers varchar,"
-                           "isEditable varchar)")){
+                           "isEditable varchar,"
+                           "UsedTime int,"
+                           "Level int)")){
                 qDebug()<<"Build table \"Sudoku\" failed";
             }
         }
@@ -39,10 +41,11 @@ bool Database::connect(QString name){
     return true;
 }
 
-bool Database::addData(QString name, QString numbers, QString isEditable){
+bool Database::addData(QString name, QString numbers, QString isEditable, int usedTime, int level){
     QSqlQuery query(db);
-    QString addDataString = QString("INSERT INTO Sudoku(Id, Name, Numbers, isEditable) VALUES (1, '%1', '%2', '%3')").
-            arg(name).arg(numbers).arg(isEditable);
+    QString date = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss ddd");
+    QString addDataString = QString("INSERT INTO Sudoku(Date, Name, Numbers, isEditable, UsedTime, Level) VALUES ('%1', '%2', '%3', '%4', %5, %6)").
+            arg(date).arg(name).arg(numbers).arg(isEditable).arg(usedTime).arg(level);
     qDebug()<<addDataString;
     if(!query.exec(addDataString)){
         qDebug()<<"Add data failed";

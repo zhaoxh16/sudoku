@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     loadWidget = new LoadWidget(this);
     connect(loadWidget,SIGNAL(returnToMenu()),this,SLOT(returnToMenu()));
     connect(this,SIGNAL(setDatabase(Database*)),loadWidget,SLOT(setDatabase(Database*)));
+    connect(loadWidget,SIGNAL(setGame(QString,QString,int,int)),this,SLOT(setGame(QString,QString,int,int)));
     stackWidget->addWidget(loadWidget);
 
     mainform = new MainForm(this);
@@ -79,5 +80,13 @@ void MainWindow::chooseLevel(){
 void MainWindow::load(){
     stackWidget->setCurrentWidget(loadWidget);
     stackWidget->setFixedSize(360,480);
+    loadWidget->refreshData();
     setFixedSize(360,480);
+}
+
+void MainWindow::setGame(QString numbers, QString isEditable, int usedTime, int level){
+    mainform->setGame(numbers,isEditable,usedTime,level);
+    stackWidget->setCurrentWidget(mainform);
+    stackWidget->setFixedSize(940,580);
+    setFixedSize(940,580);
 }

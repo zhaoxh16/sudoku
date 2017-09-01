@@ -21,6 +21,7 @@ class GameBoard : public QWidget
 public:
     explicit GameBoard(QWidget *parent = nullptr);
     void initializeGameBoard(int* numbers);//设置数独中预先填的数字
+    void initializeGameBoard(QString numbers,QString isEditable, int usedTime, int level);
     void reset();
     void setLevel(int level);
     int* getNumbers();

@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <QList>
 #include <QVariant>
+#include <QDateTime>
 
 class Database : public QObject
 {
@@ -16,7 +17,7 @@ public:
     explicit Database(QObject *parent = nullptr);
     QSqlDatabase* database();
     bool connect(QString name = "sudoku.db");//连接数据库
-    bool addData(QString name,QString numbers, QString isEditable);
+    bool addData(QString name, QString numbers, QString isEditable, int usedTime, int level);
     QList<QList<QVariant>> getData(QString name);
 
 signals:

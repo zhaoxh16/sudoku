@@ -9,6 +9,7 @@ WelcomeWidget::WelcomeWidget(QWidget *parent) :
     setStyleSheet(".QPushButton{background:rgb(106,90,205,100)}");
     connect(ui->pushButton,SIGNAL(clicked(bool)),this,SIGNAL(start()));
     connect(ui->pushButton_2,SIGNAL(clicked(bool)),this,SIGNAL(load()));
+    connect(ui->pushButton_4,SIGNAL(clicked(bool)),this,SLOT(exitGame()));
 }
 
 WelcomeWidget::~WelcomeWidget()
@@ -26,4 +27,8 @@ void WelcomeWidget::paintEvent(QPaintEvent *event){
     p->setPen(Qt::transparent);
     p->drawRect(rect());
     delete p;
+}
+
+void WelcomeWidget::exitGame(){
+    qApp->quit();
 }

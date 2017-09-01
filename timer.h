@@ -13,6 +13,7 @@ class Timer : public QWidget
     Q_OBJECT
 public:
     explicit Timer(QWidget *parent = nullptr);
+    void setTime(int usedTime);
 
 signals:
 

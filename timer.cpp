@@ -39,6 +39,11 @@ Timer::Timer(QWidget *parent) : QWidget(parent)
 
 }
 
+void Timer::setTime(int usedTime){
+    for(int i=0;i<usedTime;i++)
+        *record = record->addSecs(1);
+}
+
 void Timer::updateTime(){
     *record = record->addSecs(1);
 

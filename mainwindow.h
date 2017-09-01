@@ -21,6 +21,7 @@ public slots:
     void returnToMenu();
     void chooseLevel();
     void load();
+    void setGame(QString numbers, QString isEditable, int usedTime, int level);
 
 signals:
     void setDatabase(Database* database);

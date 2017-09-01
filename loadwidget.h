@@ -5,6 +5,7 @@
 #include <QTableVIew>
 #include <QSqlTableModel>
 #include "database.h"
+#include <QPainter>
 
 namespace Ui {
 class LoadWidget;
@@ -22,9 +23,14 @@ public:
 
 public slots:
     void setDatabase(Database* database);
+    void loadData();
 
 signals:
     void returnToMenu();
+    void setGame(QString numbers, QString isEditable, int usedTime, int level);
+
+protected:
+    void paintEvent(QPaintEvent *event);
 
 private:
     Ui::LoadWidget *ui;

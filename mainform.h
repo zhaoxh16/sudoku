@@ -22,6 +22,7 @@ public:
     explicit MainForm(QWidget *parent = nullptr);
     void setLevel(int level);
     void setTitle(QString text);
+    void setGame(QString numbers, QString isEditable, int usedTime,int level);
 
 signals:
     void finish();//当数独被完成后发出该信号

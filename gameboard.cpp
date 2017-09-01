@@ -366,6 +366,19 @@ void GameBoard::setLevel(int level){
     }
 }
 
+void GameBoard::initializeGameBoard(QString numbers, QString isEditable, int usedTime, int level){
+    reset();
+    for(int i=0;i<81;i++){
+        QString temp1 = "";
+        QString temp2 = "";
+        blocks[i]->setEditable(QVariant(temp1+isEditable.at(i)).toBool());
+        if(numbers.at(i)=='0')
+            continue;
+        blocks[i]->setNumber(QVariant(temp2+numbers.at(i)).toInt());
+    }
+
+}
+
 int* GameBoard::getNumbers(){
     for(int i=0;i<81;i++){
         sudokuNumbers[i] = blocks[i]->getOriginalNumber();

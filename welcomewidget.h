@@ -16,6 +16,9 @@ public:
     explicit WelcomeWidget(QWidget *parent = 0);
     ~WelcomeWidget();
 
+public slots:
+    void exitGame();
+
 protected:
     void paintEvent(QPaintEvent *event);
 

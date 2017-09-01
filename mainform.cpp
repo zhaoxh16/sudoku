@@ -196,3 +196,11 @@ void MainForm::reset(){
     gameBoard->reset();
     undoStack->clear();
 }
+
+void MainForm::setGame(QString numbers, QString isEditable, int usedTime, int level){
+    gameBoard->initializeGameBoard(numbers, isEditable, usedTime, level);
+    setTitle("Level "+QVariant(level).toString());
+    undoStack->clear();
+    timer->start();
+    timer->setTime(usedTime);
+}
