@@ -261,7 +261,7 @@ state SudokuAlgorithm::getSudoku(int level){
         nowState = initializeState(numbers);
         if(getSolutionNumber(nowState) == 1){
             ++total;
-            if(total == level*8)
+            if(total == level*7)
                 break;
             continue;
         }

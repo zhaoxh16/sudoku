@@ -15,6 +15,7 @@ public:
 
 public slots:
     void setLevel(int level);
+    void returnToMenu();
 
 private:
     MainForm* mainform;

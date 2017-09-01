@@ -3,6 +3,7 @@
 
 #include <QUndoCommand>
 #include "numberblock.h"
+#include <QDebug>
 
 class AddNumbersCommand: public QUndoCommand{
 public:

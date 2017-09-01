@@ -21,13 +21,20 @@ class MainForm : public QWidget
 public:
     explicit MainForm(QWidget *parent = nullptr);
     void setLevel(int level);
+    void setTitle(QString text);
 
 signals:
+    void finish();//当数独被完成后发出该信号
+    void exitToMenu();//返回主菜单
 
 public slots:
     void addNumberCommand(int* numbers, int count, NumberBlock* block);//记录所添加的数字
     void deleteNumberCommand(int* numbers, int count, NumberBlock* block);//记录所删除的数字
     void solve();
+    void reset();
+
+protected:
+    void paintEvent(QPaintEvent *event);
 
 private:
     GameBoard* gameBoard;

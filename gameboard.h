@@ -25,11 +25,13 @@ public:
     void setLevel(int level);
     int* getNumbers();
     void setNumbers(int *numbers);
+    void setEditable(bool *editable);
 
 
 signals:
     void addNumberCommand(int* numbers, int count, NumberBlock* block);//记录所添加的数字
     void deleteNumberCommand(int* numbers, int count, NumberBlock* block);//记录所删除的数字
+    void finish();//当数独被完成后发出该信号
 
 public slots:
     void moveFocus(int number);

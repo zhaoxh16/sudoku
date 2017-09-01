@@ -20,7 +20,7 @@ MainForm::MainForm(QWidget *parent) : QWidget(parent)
     timer = new Timer(this);
     timer->move(670,110);
 
-    startButton = new QPushButton("开始/暂停",this);
+    startButton = new QPushButton("开始/暂停(&P)",this);
     startButton->setFocusPolicy(Qt::NoFocus);
     startButton->resize(211,61);
     startButton->move(680,190);
@@ -41,22 +41,23 @@ MainForm::MainForm(QWidget *parent) : QWidget(parent)
     exitButton->resize(211,61);
     exitButton->move(680,330);
     exitButton->setFont(QFont("楷体",18));
+    connect(exitButton,SIGNAL(clicked(bool)),this,SIGNAL(exitToMenu()));
 
-    undoButton = new QPushButton("撤销",this);
+    undoButton = new QPushButton("撤销(&U)",this);
     undoButton->setFocusPolicy(Qt::NoFocus);
     undoButton->resize(100,40);
     undoButton->move(680,460);
     undoButton->setFont(QFont("华文新魏",14));
     connect(undoButton,SIGNAL(clicked(bool)),undoAction,SLOT(trigger()));
 
-    redoButton = new QPushButton("重做", this);
+    redoButton = new QPushButton("重做(&R)", this);
     redoButton->setFocusPolicy(Qt::NoFocus);
     redoButton->resize(100,40);
     redoButton->move(790,460);
     redoButton->setFont(QFont("华文新魏",14));
     connect(redoButton,SIGNAL(clicked(bool)),redoAction,SLOT(trigger()));
 
-    markButton = new QPushButton("标记",this);
+    markButton = new QPushButton("标记(&M)",this);
     markButton->setFocusPolicy(Qt::NoFocus);
     markButton->resize(100,40);
     markButton->move(680,410);
@@ -70,7 +71,7 @@ MainForm::MainForm(QWidget *parent) : QWidget(parent)
     deleteButton->setFont(QFont("华文新魏",14));
     connect(deleteButton,SIGNAL(clicked(bool)),gameBoard,SLOT(clearFocusBlock()));
 
-    hintButton = new QPushButton("提示",this);
+    hintButton = new QPushButton("提示(&H)",this);
     hintButton->setFocusPolicy(Qt::NoFocus);
     hintButton->resize(100,40);
     hintButton->move(680,510);
@@ -90,13 +91,22 @@ MainForm::MainForm(QWidget *parent) : QWidget(parent)
     for(int i=0;i<9;i++){
         numberButton[i] = new QPushButton(this);
         numberButton[i]->setFixedSize(40,40);
+        QFont font(numberButton[i]->font());
+        font.setPixelSize(30);
+        numberButton[i]->setFont(QFont(font));
         numberButton[i]->move(590,30+i*60);
         numberButton[i]->setFocusPolicy(Qt::NoFocus);
         numberButton[i]->setText(QVariant(i+1).toString());
+        numberButton[i]->setStyleSheet("border:none");
+        numberButton[i]->setStyleSheet("background:rgb(0,225,255,50)");
         connect(numberButton[i],SIGNAL(clicked(bool)),mapper,SLOT(map()));
         mapper->setMapping(numberButton[i],i+1);
         connect(mapper,SIGNAL(mapped(int)),gameBoard,SLOT(changeNumberOnFocusBlock(int)));
     }
+
+    setStyleSheet(".QPushButton{background:rgb(0,225,255,50)}");
+
+    connect(gameBoard,SIGNAL(finish()),this,SIGNAL(finish()));
 
 }
 
@@ -110,7 +120,27 @@ void MainForm::deleteNumberCommand(int *numbers, int count, NumberBlock *block){
 
 void MainForm::setLevel(int level){
     gameBoard->reset();
-    gameBoard->setLevel(level);
+    state newState = sudokuAlgorithm.getSudoku(level);
+    int *b = new int[81];
+    bool *c = new bool[81];
+    for(int i=0;i<81;i++){
+        for(int j=0;j<9;j++){
+            if(newState.number[i]==0){
+                b[i] = 0;
+                c[i] = 1;
+            }
+            else if(newState.number[i]==1){
+                b[i]=j+1;
+                c[i] = 0;
+                break;
+            }
+            else
+                newState.number[i]/=2;
+        }
+    }
+    gameBoard->setNumbers(b);
+    gameBoard->setEditable(c);
+    setTitle("Level "+QVariant(level).toString());
     undoStack->clear();
     timer->start();
 }
@@ -141,4 +171,27 @@ void MainForm::solve(){
     }
 
     gameBoard->setNumbers(b);
+    undoStack->clear();
+}
+
+void MainForm::paintEvent(QPaintEvent *event){
+    Q_UNUSED(event);
+
+    QPainter* p = new QPainter(this);
+    //设置抗锯齿
+    p->setRenderHint(QPainter::Antialiasing, true);
+    //设置画刷颜色
+    p->setBrush(QColor(255,250,205,100));
+    p->setPen(Qt::transparent);
+    p->drawRect(rect());
+    delete p;
+}
+
+void MainForm::setTitle(QString text){
+    title->setText(text);
+}
+
+void MainForm::reset(){
+    gameBoard->reset();
+    undoStack->clear();
 }

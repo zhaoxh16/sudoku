@@ -16,7 +16,7 @@ NumberBlock::NumberBlock(QWidget *parent) : QWidget(parent){
     label->setFont(ft);
     QGridLayout* layout = new QGridLayout(this);
     layout->setSpacing(0);
-    layout->setMargin(0);
+    layout->setMargin(3);
     layout->addWidget(label,0,0,3,3);
 
     //设置smallLabel
@@ -75,10 +75,10 @@ void NumberBlock::paintEvent(QPaintEvent *event){
         p->setBrush(QColor(0,245,255,20));
 
     if(isHighlightNumber)
-        p->setBrush(QColor(255,255,0,50));
+        p->setBrush(QColor(0,255,0,50));
 
     if(focus)
-        p->setBrush(QColor(0,255,0,30));
+        p->setBrush(QColor(0,255,0,50));
 
     if(marked){
         p->setBrush(QColor(160,32,240,80));

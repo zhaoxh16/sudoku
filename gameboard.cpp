@@ -79,6 +79,9 @@ GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
             //连接命令（用来撤销）信号
             QObject::connect(blocks[number],SIGNAL(addNumberCommand(int*,int,NumberBlock*)),this, SIGNAL(addNumberCommand(int*,int,NumberBlock*)));
             QObject::connect(blocks[number],SIGNAL(deleteNumberCommand(int*,int,NumberBlock*)),this,SIGNAL(deleteNumberCommand(int*,int,NumberBlock*)));
+            //连接judge信号
+            QObject::connect(blocks[number],SIGNAL(judge()),this,SLOT(judge()));
+
         }
     }
 
@@ -231,7 +234,8 @@ void GameBoard::clearFocusBlock(){
     if(currentItem!=NULL){
         if(currentItem->inherits("NumberBlock")){
             focusBlock = qobject_cast<NumberBlock*>(currentItem);
-            focusBlock->clear();
+            if(focusBlock->isEditable())
+                focusBlock->clear();
         }
     }
 }
@@ -270,11 +274,11 @@ void GameBoard::judge(){//判断数独是否完成
         }
         for(int j=0;j<9;j++){//列
             int number = blocks[i*9+j]->getNumber();
-            if(exist[number]){
+            if(exist[number-1]){
                 columnRight=0;
                 break;
             }else
-                exist[number]=1;
+                exist[number-1]=1;
         }
         if(columnRight == 0){
             allColumnRight = 0;
@@ -294,11 +298,11 @@ void GameBoard::judge(){//判断数独是否完成
         }
         for(int j=0;j<9;j++){//行
             int number = blocks[j*9+i]->getNumber();
-            if(exist[number]){
+            if(exist[number-1]){
                 rowRight=0;
                 break;
             }else
-                exist[number]=1;
+                exist[number-1]=1;
         }
         if(rowRight == 0){
             allRowRight = 0;
@@ -309,6 +313,32 @@ void GameBoard::judge(){//判断数独是否完成
         return;
 
     //判断每个方格是否都是对的
+    bool isRight = 1;
+    for(int bigBlockNumber = 0;bigBlockNumber<9;bigBlockNumber++){
+        bool flag = 1;
+        int firstNumber = bigBlockNumber/3*27+bigBlockNumber%3*3;//该九宫格第一个格子的编号
+        bool exist[9];
+        for(int j=0;j<9;j++)
+            exist[j] = 0;
+        for(int i=0;i<9;i++){
+            int changeNumber = i/3*9+i%3+firstNumber;
+            //该格子是否能填该数字
+            if(exist[blocks[changeNumber]->getNumber()-1]==1){
+                flag = 0;
+                break;
+            }else
+                exist[blocks[changeNumber]->getNumber()-1]=1;
+        }
+        if(flag ==0){
+            isRight=0;
+            break;
+        }
+    }
+    if(isRight == 0)
+        return;
+
+    //如果上面都对了
+    emit finish();
 
 }
 
@@ -349,5 +379,11 @@ void GameBoard::setNumbers(int *numbers){
         if(numbers[i]!=0){
             blocks[i]->setNumber(numbers[i]);
         }
+    }
+}
+
+void GameBoard::setEditable(bool *editable){
+    for(int i=0;i<81;i++){
+        blocks[i]->setEditable(editable[i]);
     }
 }
