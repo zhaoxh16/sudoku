@@ -2,7 +2,7 @@
 
 GameBoard::GameBoard(QWidget *parent) : QWidget(parent)
 {
-    database=new Database;
+    //database=new Database;
     sudokuNumbers = new int[81];
 
     setFixedSize(540,540);
@@ -386,4 +386,8 @@ void GameBoard::setEditable(bool *editable){
     for(int i=0;i<81;i++){
         blocks[i]->setEditable(editable[i]);
     }
+}
+
+void GameBoard::setDatabase(Database *database){
+    this->database = database;
 }

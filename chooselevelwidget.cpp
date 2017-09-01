@@ -22,11 +22,23 @@ ChooseLevelWidget::ChooseLevelWidget(QWidget *parent) :
         mapper->setMapping(pushButton[i],i+1);
     }
     connect(mapper,SIGNAL(mapped(int)),this,SIGNAL(chooseLevel(int)));
+    setStyleSheet(".QPushButton{background:rgb(0,225,255,50)}");
 
-    setFixedSize(400,300);
 }
 
 ChooseLevelWidget::~ChooseLevelWidget()
 {
     delete ui;
+}
+
+void ChooseLevelWidget::paintEvent(QPaintEvent *event){
+    Q_UNUSED(event);
+
+    QPainter* p = new QPainter(this);
+    p->setRenderHint(QPainter::Antialiasing, true);
+    //设置画刷颜色
+    p->setBrush(QColor(255,250,205,100));
+    p->setPen(Qt::transparent);
+    p->drawRect(rect());
+    delete p;
 }

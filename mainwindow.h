@@ -17,9 +17,13 @@ public slots:
     void setLevel(int level);
     void returnToMenu();
 
+signals:
+    void setDatabase(Database* database);
+
 private:
     MainForm* mainform;
     ChooseLevelWidget* chooseLevelWidget;
+    Database* database;
 };
 
 #endif // MAINWINDOW_H

@@ -107,6 +107,7 @@ MainForm::MainForm(QWidget *parent) : QWidget(parent)
     setStyleSheet(".QPushButton{background:rgb(0,225,255,50)}");
 
     connect(gameBoard,SIGNAL(finish()),this,SIGNAL(finish()));
+    connect(this,SIGNAL(setDatabase(Database*)),gameBoard,SLOT(setDatabase(Database*)));
 
 }
 

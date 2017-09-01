@@ -35,7 +35,8 @@ SOURCES += \
     boardcover.cpp \
     database.cpp \
     chooselevelwidget.cpp \
-    sudokualgorithm.cpp
+    sudokualgorithm.cpp \
+    welcomewidget.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -48,10 +49,12 @@ HEADERS += \
     boardcover.h \
     database.h \
     chooselevelwidget.h \
-    sudokualgorithm.h
+    sudokualgorithm.h \
+    welcomewidget.h
 
 DISTFILES +=
 
 FORMS += \
     chooselevelwidget.ui \
-    form.ui
+    form.ui \
+    welcomewidget.ui

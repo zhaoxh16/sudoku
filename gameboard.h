@@ -42,6 +42,7 @@ public slots:
     void judge();
     void clearFocusBlock();
     void changeNumberOnFocusBlock(int number);
+    void setDatabase(Database* database);
 
 protected:
     Database* database;

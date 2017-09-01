@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QSignalMapper>
+#include <QPainter>
 
 namespace Ui {
 class ChooseLevelWidget;
@@ -19,6 +20,9 @@ public:
 
 signals:
     void chooseLevel(int level);
+
+protected:
+    void paintEvent(QPaintEvent *event);
 
 private:
     Ui::ChooseLevelWidget *ui;

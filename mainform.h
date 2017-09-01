@@ -26,6 +26,7 @@ public:
 signals:
     void finish();//当数独被完成后发出该信号
     void exitToMenu();//返回主菜单
+    void setDatabase(Database* database);
 
 public slots:
     void addNumberCommand(int* numbers, int count, NumberBlock* block);//记录所添加的数字
