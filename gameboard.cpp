@@ -404,3 +404,19 @@ void GameBoard::setEditable(bool *editable){
 void GameBoard::setDatabase(Database *database){
     this->database = database;
 }
+
+QString GameBoard::getSavedNumbers(){
+    QString numbers = "";
+    for(int i=0;i<81;i++){
+        numbers+=QVariant(blocks[i]->getNumber()).toString();
+    }
+    return numbers;
+}
+
+QString GameBoard::getSavedEditable(){
+    QString editables = "";
+    for(int i=0;i<81;i++){
+        editables+=QVariant(QVariant(blocks[i]->isEditable()).toInt()).toString();
+    }
+    return editables;
+}

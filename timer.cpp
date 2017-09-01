@@ -88,3 +88,7 @@ void Timer::stop(){
     minuteLabel->setText("00");
     secondLabel->setText("00");
 }
+
+int Timer::getTime(){
+    return record->hour()*3600+record->minute()*60+record->second();
+}

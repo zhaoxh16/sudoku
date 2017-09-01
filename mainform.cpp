@@ -20,21 +20,29 @@ MainForm::MainForm(QWidget *parent) : QWidget(parent)
     timer = new Timer(this);
     timer->move(670,110);
 
-    startButton = new QPushButton("开始/暂停(&P)",this);
+    startButton = new QPushButton("暂停(&P)",this);
     startButton->setFocusPolicy(Qt::NoFocus);
-    startButton->resize(211,61);
+    startButton->resize(100,40);
     startButton->move(680,190);
-    startButton->setFont(QFont("楷体",18));
+    startButton->setFont(QFont("楷体",14));
     connect(startButton,SIGNAL(clicked(bool)),timer,SLOT(changeState()));
+    connect(startButton,SIGNAL(clicked(bool)),this,SLOT(changeStartButtonText()));
 
     restartButton = new QPushButton("重新开始",this);
     restartButton->setFocusPolicy(Qt::NoFocus);
-    restartButton->resize(211,61);
-    restartButton->move(680,260);
-    restartButton->setFont(QFont("楷体",18));
+    restartButton->resize(100,40);
+    restartButton->move(790,190);
+    restartButton->setFont(QFont("楷体",14));
     connect(restartButton,SIGNAL(clicked(bool)),timer,SLOT(stop()));
     connect(restartButton,SIGNAL(clicked(bool)),timer,SLOT(start()));
     connect(restartButton,SIGNAL(clicked(bool)),gameBoard,SLOT(restart()));
+
+    saveButton = new QPushButton("保存",this);
+    saveButton->setFocusPolicy(Qt::NoFocus);
+    saveButton->resize(211,61);
+    saveButton->move(680,260);
+    saveButton->setFont(QFont("楷体",18));
+    connect(saveButton,SIGNAL(clicked(bool)),this,SLOT(save()));
 
     exitButton = new QPushButton("主菜单",this);
     exitButton->setFocusPolicy(Qt::NoFocus);
@@ -42,6 +50,7 @@ MainForm::MainForm(QWidget *parent) : QWidget(parent)
     exitButton->move(680,330);
     exitButton->setFont(QFont("楷体",18));
     connect(exitButton,SIGNAL(clicked(bool)),this,SIGNAL(exitToMenu()));
+    connect(exitButton,SIGNAL(clicked(bool)),timer,SLOT(stop()));
 
     undoButton = new QPushButton("撤销(&U)",this);
     undoButton->setFocusPolicy(Qt::NoFocus);
@@ -203,4 +212,19 @@ void MainForm::setGame(QString numbers, QString isEditable, int usedTime, int le
     undoStack->clear();
     timer->start();
     timer->setTime(usedTime);
+}
+
+void MainForm::changeStartButtonText(){
+    if(startButton->text()=="暂停(&P)")
+        startButton->setText("开始(&P)");
+    else
+        startButton->setText("暂停(&P)");
+}
+
+void MainForm::save(){
+    QString numbers = gameBoard->getSavedNumbers();
+    QString isEditable = gameBoard->getSavedEditable();
+    int usedTime = timer->getTime();
+    int level = QVariant(QString("")+title->text().at(6)).toInt();
+    gameBoard->database->addData("test",numbers,isEditable,usedTime,level);
 }

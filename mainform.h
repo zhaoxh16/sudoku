@@ -34,6 +34,8 @@ public slots:
     void deleteNumberCommand(int* numbers, int count, NumberBlock* block);//记录所删除的数字
     void solve();
     void reset();
+    void changeStartButtonText();
+    void save();
 
 protected:
     void paintEvent(QPaintEvent *event);
@@ -50,6 +52,7 @@ private:
     QPushButton* deleteButton;
     QPushButton* hintButton;
     QPushButton* solveButton;
+    QPushButton* saveButton;
     QUndoStack* undoStack;
     SudokuAlgorithm sudokuAlgorithm;
     QLabel* title;

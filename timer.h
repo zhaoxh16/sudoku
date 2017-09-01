@@ -14,6 +14,7 @@ class Timer : public QWidget
 public:
     explicit Timer(QWidget *parent = nullptr);
     void setTime(int usedTime);
+    int getTime();//以秒为单位
 
 signals:
 

@@ -27,6 +27,9 @@ public:
     int* getNumbers();
     void setNumbers(int *numbers);
     void setEditable(bool *editable);
+    QString getSavedNumbers();
+    QString getSavedEditable();
+    Database* database;
 
 
 signals:
@@ -46,7 +49,6 @@ public slots:
     void setDatabase(Database* database);
 
 protected:
-    Database* database;
     NumberBlockPointer blocks[81];
     HighlightFrame* rowFrame[9];
     HighlightFrame* columnFrame[9];
