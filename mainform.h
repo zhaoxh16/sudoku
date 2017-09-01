@@ -36,6 +36,7 @@ public slots:
     void reset();
     void changeStartButtonText();
     void save();
+    void restart();
 
 protected:
     void paintEvent(QPaintEvent *event);

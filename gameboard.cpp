@@ -213,8 +213,10 @@ void GameBoard::restart(){
     for(int i=0;i<81;i++){
         if(blocks[i]->isEditable()){
             blocks[i]->clear();
+            blocks[i]->cancelMark();
         }
     }
+    boardCover->setCover(false);
 }
 
 void GameBoard::markFocusBlock(){
@@ -349,6 +351,7 @@ void GameBoard::reset(){
         rowFrame[i]->setVisible(false);
         rowFrame[i]->setVisible(false);
     }
+    boardCover->setCover(false);
 }
 
 void GameBoard::setLevel(int level){
@@ -419,4 +422,12 @@ QString GameBoard::getSavedEditable(){
         editables+=QVariant(QVariant(blocks[i]->isEditable()).toInt()).toString();
     }
     return editables;
+}
+
+void GameBoard::cover(){
+    boardCover->setCover(true);
+}
+
+void GameBoard::uncover(){
+    boardCover->setCover(false);
 }

@@ -12,7 +12,10 @@ void BoardCover::paintEvent(QPaintEvent *event){
     //设置抗锯齿
     p->setRenderHint(QPainter::Antialiasing, true);
     //设置画刷颜色
-    p->setBrush(Qt::transparent);
+    if(!cover)
+        p->setBrush(Qt::transparent);
+    else
+        p->setBrush(Qt::gray);
     //边框
     p->setPen(QPen(QColor(0,255,255,150),5));
     p->drawRect(rect());
@@ -31,4 +34,14 @@ void BoardCover::paintEvent(QPaintEvent *event){
         }
     }
     delete p;
+}
+
+void BoardCover::setCover(bool isCover){
+    if(isCover){
+        cover = 1;
+        update();
+    }else{
+        cover = 0;
+        update();
+    }
 }

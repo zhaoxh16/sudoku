@@ -27,6 +27,8 @@ public:
     int* getNumbers();
     void setNumbers(int *numbers);
     void setEditable(bool *editable);
+    void cover();//遮盖
+    void uncover();//取消遮盖
     QString getSavedNumbers();
     QString getSavedEditable();
     Database* database;

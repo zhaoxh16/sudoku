@@ -30,6 +30,7 @@ public:
     void changeNumberStatus(int number);
     void mark();
     void reset();
+    void cancelMark();
 
 signals:
     void moveUp();

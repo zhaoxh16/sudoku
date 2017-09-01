@@ -33,9 +33,7 @@ MainForm::MainForm(QWidget *parent) : QWidget(parent)
     restartButton->resize(100,40);
     restartButton->move(790,190);
     restartButton->setFont(QFont("楷体",14));
-    connect(restartButton,SIGNAL(clicked(bool)),timer,SLOT(stop()));
-    connect(restartButton,SIGNAL(clicked(bool)),timer,SLOT(start()));
-    connect(restartButton,SIGNAL(clicked(bool)),gameBoard,SLOT(restart()));
+    connect(restartButton,SIGNAL(clicked(bool)),this,SLOT(restart()));
 
     saveButton = new QPushButton("保存",this);
     saveButton->setFocusPolicy(Qt::NoFocus);
@@ -51,6 +49,7 @@ MainForm::MainForm(QWidget *parent) : QWidget(parent)
     exitButton->setFont(QFont("楷体",18));
     connect(exitButton,SIGNAL(clicked(bool)),this,SIGNAL(exitToMenu()));
     connect(exitButton,SIGNAL(clicked(bool)),timer,SLOT(stop()));
+    connect(exitButton,SIGNAL(clicked(bool)),this,SLOT(reset()));
 
     undoButton = new QPushButton("撤销(&U)",this);
     undoButton->setFocusPolicy(Qt::NoFocus);
@@ -204,6 +203,8 @@ void MainForm::setTitle(QString text){
 void MainForm::reset(){
     gameBoard->reset();
     undoStack->clear();
+    timer->stop();
+    startButton->setText("暂停(&P)");
 }
 
 void MainForm::setGame(QString numbers, QString isEditable, int usedTime, int level){
@@ -215,10 +216,14 @@ void MainForm::setGame(QString numbers, QString isEditable, int usedTime, int le
 }
 
 void MainForm::changeStartButtonText(){
-    if(startButton->text()=="暂停(&P)")
+    if(startButton->text()=="暂停(&P)"){
         startButton->setText("开始(&P)");
-    else
+        gameBoard->cover();
+    }
+    else{
         startButton->setText("暂停(&P)");
+        gameBoard->uncover();
+    }
 }
 
 void MainForm::save(){
@@ -227,4 +232,12 @@ void MainForm::save(){
     int usedTime = timer->getTime();
     int level = QVariant(QString("")+title->text().at(6)).toInt();
     gameBoard->database->addData("test",numbers,isEditable,usedTime,level);
+}
+
+void MainForm::restart(){
+    timer->stop();
+    timer->start();
+    gameBoard->restart();
+    startButton->setText("暂停(&P)");
+    undoStack->clear();
 }

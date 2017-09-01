@@ -299,3 +299,8 @@ void NumberBlock::changeNumberStatus(int number){
             emit addNumberCommand(numbers,1,this);
     }
 }
+
+void NumberBlock::cancelMark(){
+    marked = 0;
+    update();
+}

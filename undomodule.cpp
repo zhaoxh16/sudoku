@@ -7,7 +7,6 @@ AddNumbersCommand::AddNumbersCommand(int* numbers, int count, NumberBlock* block
     for(int i=0;i<9;i++){
         this->numbers[i] = numbers[i];
     }
-    qDebug()<<"command: add number " + QVariant(numbers[0]).toString();
 }
 
 AddNumbersCommand::~AddNumbersCommand(){
@@ -16,14 +15,10 @@ AddNumbersCommand::~AddNumbersCommand(){
 
 void AddNumbersCommand::redo(){
     block->addNumbers(numbers,count);
-    qDebug()<<"addNumberCommand redo active";
-    qDebug()<<QVariant(numbers[0]).toString();
 }
 
 void AddNumbersCommand::undo(){
     block->deleteNumbers(numbers,count);
-    qDebug()<<"addNumberCommand undo active";
-    qDebug()<<QVariant(numbers[0]).toString();
 }
 
 DeleteNumberCommand::DeleteNumberCommand(int* numbers, int count, NumberBlock* block):QUndoCommand("Delete Number"){
@@ -33,7 +28,6 @@ DeleteNumberCommand::DeleteNumberCommand(int* numbers, int count, NumberBlock* b
     for(int i=0;i<9;i++){
         this->numbers[i] = numbers[i];
     }
-    qDebug()<<"command: delete number " + QVariant(numbers[0]).toString();
 }
 
 DeleteNumberCommand::~DeleteNumberCommand(){
@@ -42,12 +36,8 @@ DeleteNumberCommand::~DeleteNumberCommand(){
 
 void DeleteNumberCommand::redo(){
     block->deleteNumbers(numbers,count);
-    qDebug()<<"deleteNumberCommand redo active";
-    qDebug()<<QVariant(numbers[0]).toString();
 }
 
 void DeleteNumberCommand::undo(){
     block->addNumbers(numbers,count);
-    qDebug()<<"deleteNumberCommand undo active";
-    qDebug()<<QVariant(numbers[0]).toString();
 }
