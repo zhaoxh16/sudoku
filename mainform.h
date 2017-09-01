@@ -25,7 +25,6 @@ public:
     void setGame(QString numbers, QString isEditable, int usedTime,int level);
 
 signals:
-    void finish();//当数独被完成后发出该信号
     void exitToMenu();//返回主菜单
     void setDatabase(Database* database);
 
@@ -33,10 +32,12 @@ public slots:
     void addNumberCommand(int* numbers, int count, NumberBlock* block);//记录所添加的数字
     void deleteNumberCommand(int* numbers, int count, NumberBlock* block);//记录所删除的数字
     void solve();
+    void getSolutions();
     void reset();
     void changeStartButtonText();
     void save();
     void restart();
+    void finish();//当数独被完成后执行
 
 protected:
     void paintEvent(QPaintEvent *event);

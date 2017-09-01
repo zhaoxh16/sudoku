@@ -431,3 +431,29 @@ void GameBoard::cover(){
 void GameBoard::uncover(){
     boardCover->setCover(false);
 }
+
+void GameBoard::setSolutions(int *numbers){
+    for(int i=0;i<81;i++){
+        blocks[i]->getSolution(numbers[i]);
+    }
+}
+
+void GameBoard::fillWithSolutions(){
+    for(int i=0;i<81;i++){
+        if(blocks[i]->isEditable()){
+            blocks[i]->setSolution();
+        }
+    }
+}
+
+void GameBoard::hintFocusBlock(){
+    NumberBlock* focusBlock;
+    QWidget* currentItem = QApplication::focusWidget();
+    if(currentItem!=NULL){
+        if(currentItem->inherits("NumberBlock")){
+            focusBlock = qobject_cast<NumberBlock*>(currentItem);
+            if(focusBlock->isEditable())
+                focusBlock->setSolution();
+        }
+    }
+}

@@ -26,7 +26,7 @@ protected:
 
 private:
     Ui::ChooseLevelWidget *ui;
-    QPushButton* pushButton[12];
+    QPushButton* pushButton[10];
 };
 
 #endif // CHOOSELEVELWIDGET_H

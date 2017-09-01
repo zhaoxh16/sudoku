@@ -18,8 +18,8 @@
     <rect>
      <x>30</x>
      <y>160</y>
-     <width>301</width>
-     <height>261</height>
+     <width>319</width>
+     <height>298</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -54,6 +54,19 @@
       </property>
      </widget>
     </item>
+    <item row="2" column="1">
+     <widget class="QPushButton" name="pushButton_8">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>62</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Level8</string>
+      </property>
+     </widget>
+    </item>
     <item row="2" column="0">
      <widget class="QPushButton" name="pushButton_7">
       <property name="minimumSize">
@@ -67,8 +80,8 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="1">
-     <widget class="QPushButton" name="pushButton_8">
+    <item row="2" column="2">
+     <widget class="QPushButton" name="pushButton_9">
       <property name="minimumSize">
        <size>
         <width>0</width>
@@ -76,7 +89,7 @@
        </size>
       </property>
       <property name="text">
-       <string>Level8</string>
+       <string>Level9</string>
       </property>
      </widget>
     </item>
@@ -99,22 +112,6 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="0">
-     <widget class="QPushButton" name="pushButton_4">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>62</height>
-       </size>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string>Level4</string>
-      </property>
-     </widget>
-    </item>
     <item row="1" column="1">
      <widget class="QPushButton" name="pushButton_5">
       <property name="minimumSize">
@@ -128,16 +125,19 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="2">
-     <widget class="QPushButton" name="pushButton_9">
+    <item row="1" column="0">
+     <widget class="QPushButton" name="pushButton_4">
       <property name="minimumSize">
        <size>
         <width>0</width>
         <height>62</height>
        </size>
       </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="text">
-       <string>Level9</string>
+       <string>Level4</string>
       </property>
      </widget>
     </item>
@@ -182,6 +182,19 @@
       </property>
       <property name="text">
        <string>Level1</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QPushButton" name="pushButton_10">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>62</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Level10</string>
       </property>
      </widget>
     </item>

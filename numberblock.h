@@ -31,6 +31,8 @@ public:
     void mark();
     void reset();
     void cancelMark();
+    void getSolution(int solution);
+    void setSolution();
 
 signals:
     void moveUp();
@@ -59,6 +61,7 @@ private:
     QLabel* label;
     QLabel* smallLabel[9];
     int usedLabel = 0;
+    int solution = 0;
 
     bool editable = 1;
     bool marked = 0;

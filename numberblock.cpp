@@ -304,3 +304,14 @@ void NumberBlock::cancelMark(){
     marked = 0;
     update();
 }
+
+void NumberBlock::getSolution(int solution){
+    this->solution=solution;
+}
+
+void NumberBlock::setSolution(){
+    clear();
+    int numbers[1];
+    numbers[0] = solution;
+    addNumbers(numbers,1);
+}

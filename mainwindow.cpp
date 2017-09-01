@@ -24,7 +24,6 @@ MainWindow::MainWindow(QWidget *parent)
     stackWidget->addWidget(loadWidget);
 
     mainform = new MainForm(this);
-    connect(mainform,SIGNAL(finish()),this,SLOT(returnToMenu()));
     connect(mainform,SIGNAL(exitToMenu()),this,SLOT(returnToMenu()));
     connect(this,SIGNAL(setDatabase(Database*)),mainform,SIGNAL(setDatabase(Database*)));
     stackWidget->addWidget(mainform);

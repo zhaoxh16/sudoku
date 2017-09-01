@@ -84,6 +84,7 @@ MainForm::MainForm(QWidget *parent) : QWidget(parent)
     hintButton->resize(100,40);
     hintButton->move(680,510);
     hintButton->setFont(QFont("华文新魏",14));
+    connect(hintButton,SIGNAL(clicked(bool)),gameBoard,SLOT(hintFocusBlock()));
 
     solveButton = new QPushButton("答案",this);
     solveButton->setFocusPolicy(Qt::NoFocus);
@@ -114,7 +115,7 @@ MainForm::MainForm(QWidget *parent) : QWidget(parent)
 
     setStyleSheet(".QPushButton{background:rgb(0,225,255,50)}");
 
-    connect(gameBoard,SIGNAL(finish()),this,SIGNAL(finish()));
+    connect(gameBoard,SIGNAL(finish()),this,SLOT(finish()));
     connect(this,SIGNAL(setDatabase(Database*)),gameBoard,SLOT(setDatabase(Database*)));
 
 }
@@ -149,12 +150,13 @@ void MainForm::setLevel(int level){
     }
     gameBoard->setNumbers(b);
     gameBoard->setEditable(c);
+    getSolutions();
     setTitle("Level "+QVariant(level).toString());
     undoStack->clear();
     timer->start();
 }
 
-void MainForm::solve(){
+void MainForm::getSolutions(){
     undoStack->clear();
     int *a = gameBoard->getNumbers();
     sudokuAlgorithm.reset();
@@ -179,8 +181,12 @@ void MainForm::solve(){
         }
     }
 
-    gameBoard->setNumbers(b);
+    gameBoard->setSolutions(b);
     undoStack->clear();
+}
+
+void MainForm::solve(){
+    gameBoard->fillWithSolutions();
 }
 
 void MainForm::paintEvent(QPaintEvent *event){
@@ -209,6 +215,7 @@ void MainForm::reset(){
 
 void MainForm::setGame(QString numbers, QString isEditable, int usedTime, int level){
     gameBoard->initializeGameBoard(numbers, isEditable, usedTime, level);
+    getSolutions();
     setTitle("Level "+QVariant(level).toString());
     undoStack->clear();
     timer->start();
@@ -240,4 +247,9 @@ void MainForm::restart(){
     gameBoard->restart();
     startButton->setText("暂停(&P)");
     undoStack->clear();
+}
+
+void MainForm::finish(){
+    timer->changeState();
+    startButton->setText("开始(&P)");
 }

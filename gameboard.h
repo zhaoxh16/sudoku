@@ -26,6 +26,8 @@ public:
     void setLevel(int level);
     int* getNumbers();
     void setNumbers(int *numbers);
+    void setSolutions(int *numbers);
+    void fillWithSolutions();
     void setEditable(bool *editable);
     void cover();//遮盖
     void uncover();//取消遮盖
@@ -45,6 +47,7 @@ public slots:
     void showHighlightNumber(int number);
     void restart();
     void markFocusBlock();
+    void hintFocusBlock();
     void judge();
     void clearFocusBlock();
     void changeNumberOnFocusBlock(int number);
@@ -57,7 +60,6 @@ protected:
     BoardCover* boardCover;
     void paintEvent(QPaintEvent *event);
     int* sudokuNumbers;
-    int solution[81];
 };
 
 #endif // GAMEBOARD_H
