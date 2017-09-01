@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
+QT       += core gui sql multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -54,10 +54,11 @@ HEADERS += \
     welcomewidget.h \
     loadwidget.h
 
-DISTFILES +=
+DISTFILES += \
+    ../Dan Gibson - Nature's Path 自然小径_01.wav \
+    ../Dan Gibson - Nature's Path 自然小径_01.wav
 
 FORMS += \
     chooselevelwidget.ui \
-    form.ui \
     welcomewidget.ui \
     loadwidget.ui

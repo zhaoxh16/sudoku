@@ -3,6 +3,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
+
     stackWidget = new QStackedWidget(this);
     setCentralWidget(stackWidget);
     stackWidget->setFixedSize(360,480);

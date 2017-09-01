@@ -55,6 +55,7 @@ protected:
     BoardCover* boardCover;
     void paintEvent(QPaintEvent *event);
     int* sudokuNumbers;
+    int solution[81];
 };
 
 #endif // GAMEBOARD_H

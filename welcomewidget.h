@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QPainter>
+#include <QSound>
 
 namespace Ui {
 class WelcomeWidget;
@@ -18,6 +19,7 @@ public:
 
 public slots:
     void exitGame();
+    void controlMusic();
 
 protected:
     void paintEvent(QPaintEvent *event);
@@ -29,6 +31,7 @@ signals:
 
 private:
     Ui::WelcomeWidget *ui;
+    QSound* bells;
 };
 
 #endif // WELCOMEWIDGET_H

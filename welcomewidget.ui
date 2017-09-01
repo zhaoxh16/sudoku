@@ -126,7 +126,7 @@
     </font>
    </property>
    <property name="text">
-    <string>游戏设置</string>
+    <string>音乐：开</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_4">

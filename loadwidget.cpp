@@ -25,8 +25,11 @@ void LoadWidget::setDatabase(Database *database){
 
 void LoadWidget::refreshData(){
     dataModel->setTable("Sudoku");
+    dataModel->setSort(0,Qt::DescendingOrder);
     dataModel->select();
     dataView->setModel(dataModel);
+    dataView->hideColumn(2);
+    dataView->hideColumn(3);
 }
 
 LoadWidget::~LoadWidget()
