@@ -250,6 +250,7 @@ void MainForm::restart(){
 }
 
 void MainForm::finish(){
-    timer->changeState();
+    timer->pause();
     startButton->setText("开始(&P)");
+    emit youWin();
 }

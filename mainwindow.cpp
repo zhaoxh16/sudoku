@@ -26,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
     mainform = new MainForm(this);
     connect(mainform,SIGNAL(exitToMenu()),this,SLOT(returnToMenu()));
     connect(this,SIGNAL(setDatabase(Database*)),mainform,SIGNAL(setDatabase(Database*)));
+    connect(mainform,SIGNAL(youWin()),this,SLOT(win()));
     stackWidget->addWidget(mainform);
 
     setWindowFlags(windowFlags()& ~Qt::WindowMaximizeButtonHint);
@@ -89,4 +90,13 @@ void MainWindow::setGame(QString numbers, QString isEditable, int usedTime, int 
     stackWidget->setCurrentWidget(mainform);
     stackWidget->setFixedSize(940,580);
     setFixedSize(940,580);
+}
+
+void MainWindow::win(){
+    if(dialog == NULL){
+        dialog = new WinDialog;
+        dialog->setModal(true);
+        dialog->move(this->width()/2,this->height()/2);
+    }
+    dialog->show();
 }

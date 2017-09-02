@@ -27,6 +27,7 @@ public:
 signals:
     void exitToMenu();//返回主菜单
     void setDatabase(Database* database);
+    void youWin();
 
 public slots:
     void addNumberCommand(int* numbers, int count, NumberBlock* block);//记录所添加的数字

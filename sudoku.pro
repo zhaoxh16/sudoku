@@ -37,7 +37,8 @@ SOURCES += \
     chooselevelwidget.cpp \
     sudokualgorithm.cpp \
     welcomewidget.cpp \
-    loadwidget.cpp
+    loadwidget.cpp \
+    windialog.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -52,7 +53,8 @@ HEADERS += \
     chooselevelwidget.h \
     sudokualgorithm.h \
     welcomewidget.h \
-    loadwidget.h
+    loadwidget.h \
+    windialog.h
 
 DISTFILES += \
     ../Dan Gibson - Nature's Path 自然小径_01.wav \
@@ -61,4 +63,5 @@ DISTFILES += \
 FORMS += \
     chooselevelwidget.ui \
     welcomewidget.ui \
-    loadwidget.ui
+    loadwidget.ui \
+    windialog.ui

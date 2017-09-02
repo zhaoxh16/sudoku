@@ -12,10 +12,15 @@ void BoardCover::paintEvent(QPaintEvent *event){
     //设置抗锯齿
     p->setRenderHint(QPainter::Antialiasing, true);
     //设置画刷颜色
-    if(!cover)
+    if(!cover){
         p->setBrush(Qt::transparent);
-    else
+        setAttribute(Qt::WA_TransparentForMouseEvents,true);
+    }
+    else{
         p->setBrush(Qt::gray);
+        setAttribute(Qt::WA_TransparentForMouseEvents,false);
+        this->setFocus();
+    }
     //边框
     p->setPen(QPen(QColor(0,255,255,150),5));
     p->drawRect(rect());

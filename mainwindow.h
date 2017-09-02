@@ -7,6 +7,7 @@
 #include "chooselevelwidget.h"
 #include "welcomewidget.h"
 #include "loadwidget.h"
+#include "windialog.h"
 
 class MainWindow : public QMainWindow
 {
@@ -22,6 +23,7 @@ public slots:
     void chooseLevel();
     void load();
     void setGame(QString numbers, QString isEditable, int usedTime, int level);
+    void win();
 
 signals:
     void setDatabase(Database* database);
@@ -33,6 +35,7 @@ private:
     Database* database;
     QStackedWidget* stackWidget;
     LoadWidget* loadWidget;
+    WinDialog* dialog = NULL;
 };
 
 #endif // MAINWINDOW_H
